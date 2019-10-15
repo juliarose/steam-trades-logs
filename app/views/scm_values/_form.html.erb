@@ -1,0 +1,27 @@
+<%= form_with(model: scm_value, local: true) do |form| %>
+  <% if scm_value.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(scm_value.errors.count, "error") %> prohibited this scm_value from being saved:</h2>
+
+      <ul>
+        <% scm_value.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :value %>
+    <%= form.text_field :value %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date, start_year: 2003 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

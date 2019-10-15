@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Key Values</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @key_values.each do |key_value| %>
+      <tr>
+        <td><%= key_value.value %></td>
+        <td><%= key_value.date %></td>
+        <td><%= link_to 'Show', key_value %></td>
+        <td><%= link_to 'Edit', edit_key_value_path(key_value) %></td>
+        <td><%= link_to 'Destroy', key_value, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Key Value', new_key_value_path %>

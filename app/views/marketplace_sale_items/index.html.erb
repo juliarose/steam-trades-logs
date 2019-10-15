@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Marketplace Sale Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Marketplace sale</th>
+      <th>Price</th>
+      <th>Item</th>
+      <th>Item original</th>
+      <th>Full name</th>
+      <th>Defindex</th>
+      <th>Particle</th>
+      <th>Quality</th>
+      <th>Killstreak tier</th>
+      <th>Skin name</th>
+      <th>Item name</th>
+      <th>Wear</th>
+      <th>Sku</th>
+      <th>Full sku</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @marketplace_sale_items.each do |marketplace_sale_item| %>
+      <tr>
+        <td><%= marketplace_sale_item.marketplace_sale_id %></td>
+        <td><%= marketplace_sale_item.price %></td>
+        <td><%= marketplace_sale_item.item_id %></td>
+        <td><%= marketplace_sale_item.item_original_id %></td>
+        <td><%= marketplace_sale_item.full_name %></td>
+        <td><%= marketplace_sale_item.defindex %></td>
+        <td><%= marketplace_sale_item.particle_id %></td>
+        <td><%= marketplace_sale_item.quality_id %></td>
+        <td><%= marketplace_sale_item.killstreak_tier_id %></td>
+        <td><%= marketplace_sale_item.skin_name %></td>
+        <td><%= marketplace_sale_item.item_name %></td>
+        <td><%= marketplace_sale_item.wear_id %></td>
+        <td><%= marketplace_sale_item.sku %></td>
+        <td><%= marketplace_sale_item.full_sku %></td>
+        <td><%= link_to 'Show', marketplace_sale_item %></td>
+        <td><%= link_to 'Edit', edit_marketplace_sale_item_path(marketplace_sale_item) %></td>
+        <td><%= link_to 'Destroy', marketplace_sale_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Marketplace Sale Item', new_marketplace_sale_item_path %>

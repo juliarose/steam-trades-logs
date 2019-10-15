@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  marketplace_sale: one
+  price: 1
+  item_id: 1
+  item_original_id: 1
+  full_name: MyString
+  defindex: 1
+  particle_id: 1
+  quality_id: 1
+  killstreak_tier_id: 1
+  skin_name: MyString
+  item_name: MyString
+  wear_id: 1
+  sku: MyString
+
+two:
+  marketplace_sale: two
+  price: 1
+  item_id: 1
+  item_original_id: 1
+  full_name: MyString
+  defindex: 1
+  particle_id: 1
+  quality_id: 1
+  killstreak_tier_id: 1
+  skin_name: MyString
+  item_name: MyString
+  wear_id: 1
+  sku: MyString

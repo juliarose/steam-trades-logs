@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Assetid:</strong>
+  <%= @detail_item.assetid %>
+</p>
+
+<p>
+  <strong>Appid:</strong>
+  <%= @detail_item.appid %>
+</p>
+
+<p>
+  <strong>Contextid:</strong>
+  <%= @detail_item.contextid %>
+</p>
+
+<p>
+  <strong>Defindex:</strong>
+  <%= @detail_item.defindex %>
+</p>
+
+<p>
+  <strong>Craftable:</strong>
+  <%= @detail_item.craftable %>
+</p>
+
+<p>
+  <strong>Skin name:</strong>
+  <%= @detail_item.skin_name %>
+</p>
+
+<p>
+  <strong>Killstreak tier:</strong>
+  <%= @detail_item.killstreak_tier_id %>
+</p>
+
+<p>
+  <strong>Wear:</strong>
+  <%= @detail_item.wear_id %>
+</p>
+
+<%= link_to 'Edit', edit_detail_item_path(@detail_item) %> |
+<%= link_to 'Back', detail_items_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Usd Values</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usd_values.each do |usd_value| %>
+      <tr>
+        <td><%= usd_value.value %></td>
+        <td><%= usd_value.date %></td>
+        <td><%= link_to 'Show', usd_value %></td>
+        <td><%= link_to 'Edit', edit_usd_value_path(usd_value) %></td>
+        <td><%= link_to 'Destroy', usd_value, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Usd Value', new_usd_value_path %>

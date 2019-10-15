@@ -1,0 +1,57 @@
+<%= form_with(model: detail_item, local: true) do |form| %>
+  <% if detail_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(detail_item.errors.count, "error") %> prohibited this detail_item from being saved:</h2>
+
+      <ul>
+        <% detail_item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :assetid %>
+    <%= form.text_field :assetid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :appid %>
+    <%= form.number_field :appid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contextid %>
+    <%= form.number_field :contextid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :defindex %>
+    <%= form.number_field :defindex %>
+  </div>
+
+  <div class="field">
+    <%= form.label :craftable %>
+    <%= form.check_box :craftable %>
+  </div>
+
+  <div class="field">
+    <%= form.label :skin_name %>
+    <%= form.text_field :skin_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :killstreak_tier_id %>
+    <%= form.number_field :killstreak_tier_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wear_id %>
+    <%= form.number_field :wear_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

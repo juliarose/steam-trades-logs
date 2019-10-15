@@ -1,0 +1,87 @@
+<%= form_with(model: marketplace_sale_item, local: true) do |form| %>
+  <% if marketplace_sale_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(marketplace_sale_item.errors.count, "error") %> prohibited this marketplace_sale_item from being saved:</h2>
+
+      <ul>
+        <% marketplace_sale_item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :marketplace_sale_id %>
+    <%= form.text_field :marketplace_sale_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_id %>
+    <%= form.number_field :item_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_original_id %>
+    <%= form.number_field :item_original_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :full_name %>
+    <%= form.text_field :full_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :defindex %>
+    <%= form.number_field :defindex %>
+  </div>
+
+  <div class="field">
+    <%= form.label :particle_id %>
+    <%= form.number_field :particle_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quality_id %>
+    <%= form.number_field :quality_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :killstreak_tier_id %>
+    <%= form.number_field :killstreak_tier_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :skin_name %>
+    <%= form.text_field :skin_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_name %>
+    <%= form.text_field :item_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wear_id %>
+    <%= form.number_field :wear_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sku %>
+    <%= form.text_field :sku %>
+  </div>
+
+  <div class="field">
+    <%= form.label :full_sku %>
+    <%= form.text_field :full_sku %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

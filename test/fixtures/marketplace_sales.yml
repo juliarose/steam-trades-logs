@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  earned_credit: 1
+  transaction_id: MyString
+  date: 2019-09-27 22:23:44
+
+two:
+  earned_credit: 1
+  transaction_id: MyString
+  date: 2019-09-27 22:23:44

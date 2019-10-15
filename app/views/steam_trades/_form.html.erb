@@ -1,0 +1,42 @@
+<%= form_with(model: steam_trade, local: true) do |form| %>
+  <% if steam_trade.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(steam_trade.errors.count, "error") %> prohibited this steam_trade from being saved:</h2>
+
+      <ul>
+        <% steam_trade.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :steamid %>
+    <%= form.text_field :steamid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :steamid_other %>
+    <%= form.text_field :steamid_other %>
+  </div>
+
+  <div class="field">
+    <%= form.label :traded_at %>
+    <%= form.datetime_select :traded_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :trade_offer_state %>
+    <%= form.number_field :trade_offer_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_field :notes %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Marketplace Sales</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Earned credit</th>
+      <th>Transaction</th>
+      <th>Date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @marketplace_sales.each do |marketplace_sale| %>
+      <tr>
+        <td><%= marketplace_sale.earned_credit %></td>
+        <td><%= marketplace_sale.transaction_id %></td>
+        <td><%= marketplace_sale.date %></td>
+        <td><%= link_to 'Show', marketplace_sale %></td>
+        <td><%= link_to 'Edit', edit_marketplace_sale_path(marketplace_sale) %></td>
+        <td><%= link_to 'Destroy', marketplace_sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Marketplace Sale', new_marketplace_sale_path %>

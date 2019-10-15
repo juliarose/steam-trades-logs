@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @scm_value.value %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @scm_value.date %>
+</p>
+
+<%= link_to 'Edit', edit_scm_value_path(@scm_value) %> |
+<%= link_to 'Back', scm_values_path %>

@@ -1,0 +1,27 @@
+<%= form_with(model: key_value, local: true) do |form| %>
+  <% if key_value.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(key_value.errors.count, "error") %> prohibited this key_value from being saved:</h2>
+
+      <ul>
+        <% key_value.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :value %>
+    <%= form.text_field :value %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

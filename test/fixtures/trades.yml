@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  steamid: MyString
+  steamid_other: MyString
+  traded_at: 2019-07-12 03:14:34
+  trade_offer_state: 1
+  notes: MyString
+
+two:
+  steamid: MyString
+  steamid_other: MyString
+  traded_at: 2019-07-12 03:14:34
+  trade_offer_state: 1
+  notes: MyString

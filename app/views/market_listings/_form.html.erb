@@ -1,0 +1,112 @@
+<%= form_with(model: market_listing, local: true) do |form| %>
+  <% if market_listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(market_listing.errors.count, "error") %> prohibited this market_listing from being saved:</h2>
+
+      <ul>
+        <% market_listing.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :transaction_id %>
+    <%= form.text_field :transaction_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transaction_id_high %>
+    <%= form.text_field :transaction_id_high %>
+  </div>
+
+  <div class="field">
+    <%= form.label :index %>
+    <%= form.number_field :index %>
+  </div>
+
+  <div class="field">
+    <%= form.label :appid %>
+    <%= form.text_field :appid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contextid %>
+    <%= form.text_field :contextid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :is_credit %>
+    <%= form.check_box :is_credit %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :market_name %>
+    <%= form.text_field :market_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :market_hash_name %>
+    <%= form.text_field :market_hash_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name_color %>
+    <%= form.text_field :name_color %>
+  </div>
+
+  <div class="field">
+    <%= form.label :background_color %>
+    <%= form.text_field :background_color %>
+  </div>
+
+  <div class="field">
+    <%= form.label :assetid %>
+    <%= form.text_field :assetid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :classid %>
+    <%= form.text_field :classid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :instanceid %>
+    <%= form.text_field :instanceid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :icon_url %>
+    <%= form.text_field :icon_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_acted %>
+    <%= form.date_select :date_acted %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_listed %>
+    <%= form.date_select :date_listed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :seller %>
+    <%= form.text_field :seller %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

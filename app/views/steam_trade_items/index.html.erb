@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Detail Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Assetid</th>
+      <th>Appid</th>
+      <th>Contextid</th>
+      <th>Defindex</th>
+      <th>Craftable</th>
+      <th>Skin name</th>
+      <th>Killstreak tier</th>
+      <th>Wear</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @detail_items.each do |detail_item| %>
+      <tr>
+        <td><%= detail_item.assetid %></td>
+        <td><%= detail_item.appid %></td>
+        <td><%= detail_item.contextid %></td>
+        <td><%= detail_item.defindex %></td>
+        <td><%= detail_item.craftable %></td>
+        <td><%= detail_item.skin_name %></td>
+        <td><%= detail_item.killstreak_tier_id %></td>
+        <td><%= detail_item.wear_id %></td>
+        <td><%= link_to 'Show', detail_item %></td>
+        <td><%= link_to 'Edit', edit_detail_item_path(detail_item) %></td>
+        <td><%= link_to 'Destroy', detail_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Detail Item', new_detail_item_path %>

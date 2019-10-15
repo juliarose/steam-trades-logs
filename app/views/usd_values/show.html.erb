@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @usd_value.value %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @usd_value.date %>
+</p>
+
+<%= link_to 'Edit', edit_usd_value_path(@usd_value) %> |
+<%= link_to 'Back', usd_values_path %>

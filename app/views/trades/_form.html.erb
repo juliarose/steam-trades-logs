@@ -1,0 +1,137 @@
+<%= form_with(model: trade, local: true) do |form| %>
+  <% if trade.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(trade.errors.count, "error") %> prohibited this trade from being saved:</h2>
+
+      <ul>
+        <% trade.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :assetid %>
+    <%= form.number_field :assetid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :appid %>
+    <%= form.number_field :appid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contextid %>
+    <%= form.number_field :contextid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_name %>
+    <%= form.text_field :item_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :defindex %>
+    <%= form.number_field :defindex %>
+  </div>
+
+  <div class="field">
+    <%= form.label :craftable %>
+    <%= form.check_box :craftable %>
+  </div>
+
+  <div class="field">
+    <%= form.label :skin_name %>
+    <%= form.text_field :skin_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :killstreak_tier_id %>
+    <%= form.number_field :killstreak_tier_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wear_id %>
+    <%= form.number_field :wear_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :particle_id %>
+    <%= form.number_field :particle_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quality_id %>
+    <%= form.number_field :quality_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :purchased_at %>
+    <%= form.date_select :purchased_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sold_at %>
+    <%= form.date_select :sold_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :keys_spent %>
+    <%= form.text_field :keys_spent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :scm_spent %>
+    <%= form.text_field :scm_spent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :usd_spent %>
+    <%= form.text_field :usd_spent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :items_spent %>
+    <%= form.text_field :items_spent %>
+  </div>
+
+  <div class="field">
+    <%= form.label :keys_received %>
+    <%= form.text_field :keys_received %>
+  </div>
+
+  <div class="field">
+    <%= form.label :scm_received %>
+    <%= form.text_field :scm_received %>
+  </div>
+
+  <div class="field">
+    <%= form.label :usd_received %>
+    <%= form.text_field :usd_received %>
+  </div>
+
+  <div class="field">
+    <%= form.label :items_received %>
+    <%= form.text_field :items_received %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_field :notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :steamid %>
+    <%= form.text_field :steamid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :steamid_other %>
+    <%= form.text_field :steamid_other %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

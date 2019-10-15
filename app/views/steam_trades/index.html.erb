@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Steam Trades</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Steamid</th>
+      <th>Steamid other</th>
+      <th>Traded at</th>
+      <th>Trade offer state</th>
+      <th>Notes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @steam_trades.each do |steam_trade| %>
+      <tr>
+        <td><%= steam_trade.steamid %></td>
+        <td><%= steam_trade.steamid_other %></td>
+        <td><%= steam_trade.traded_at %></td>
+        <td><%= steam_trade.trade_offer_state %></td>
+        <td><%= steam_trade.notes %></td>
+        <td><%= link_to 'Show', steam_trade %></td>
+        <td><%= link_to 'Edit', edit_steam_trade_path(steam_trade) %></td>
+        <td><%= link_to 'Destroy', steam_trade, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Trade', new_steam_trade_path %>

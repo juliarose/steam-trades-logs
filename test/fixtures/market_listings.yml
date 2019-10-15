@@ -1,0 +1,43 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  transaction_id: MyString
+  transaction_id_high: MyString
+  index: 1
+  appid: MyString
+  contextid: MyString
+  is_credit: false
+  name: MyString
+  market_name: MyString
+  market_hash_name: MyString
+  name_color: MyString
+  background_color: MyString
+  assetid: MyString
+  classid: MyString
+  instanceid: MyString
+  icon_url: MyString
+  date_acted: 2019-09-13
+  date_listed: 2019-09-13
+  price: 1
+  seller: MyString
+
+two:
+  transaction_id: MyString
+  transaction_id_high: MyString
+  index: 1
+  appid: MyString
+  contextid: MyString
+  is_credit: false
+  name: MyString
+  market_name: MyString
+  market_hash_name: MyString
+  name_color: MyString
+  background_color: MyString
+  assetid: MyString
+  classid: MyString
+  instanceid: MyString
+  icon_url: MyString
+  date_acted: 2019-09-13
+  date_listed: 2019-09-13
+  price: 1
+  seller: MyString

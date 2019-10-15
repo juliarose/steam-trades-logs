@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Steamid:</strong>
+  <%= @steam_trade.steamid %>
+</p>
+
+<p>
+  <strong>Steamid other:</strong>
+  <%= @steam_trade.steamid_other %>
+</p>
+
+<p>
+  <strong>Traded at:</strong>
+  <%= @steam_trade.traded_at %>
+</p>
+
+<p>
+  <strong>Trade offer state:</strong>
+  <%= @steam_trade.trade_offer_state %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @steam_trade.notes %>
+</p>
+
+<%= link_to 'Edit', edit_steam_trade_path(@steam_trade) %> |
+<%= link_to 'Back', steam_trades_path %>
