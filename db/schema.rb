@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_28_093003) do
+ActiveRecord::Schema.define(version: 2020_05_11_055559) do
 
   create_table "key_values", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.float "value"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_09_28_093003) do
   end
 
   create_table "market_listings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "transaction_id"
+    t.string "transaction_id", null: false
     t.string "transaction_id_high"
     t.integer "index"
     t.integer "appid"
@@ -35,9 +35,9 @@ ActiveRecord::Schema.define(version: 2019_09_28_093003) do
     t.bigint "classid"
     t.bigint "instanceid"
     t.text "icon_url", size: :medium
-    t.date "date_acted"
-    t.date "date_listed"
-    t.integer "price"
+    t.date "date_acted", null: false
+    t.date "date_listed", null: false
+    t.integer "price", null: false
     t.string "seller"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -50,13 +50,16 @@ ActiveRecord::Schema.define(version: 2019_09_28_093003) do
     t.string "transaction_id_low"
     t.string "skin_name"
     t.string "item_name"
+    t.boolean "australium"
+    t.index ["quality_id", "is_credit"], name: "market_listings_quality_id_is_credit"
+    t.index ["transaction_id"], name: "market_listings_transaction_id"
   end
 
   create_table "marketplace_sale_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "marketplace_sale_id", null: false
-    t.integer "price"
-    t.bigint "item_id"
-    t.bigint "item_original_id"
+    t.integer "price", null: false
+    t.bigint "assetid"
+    t.bigint "asset_original_id"
     t.string "full_name"
     t.integer "defindex"
     t.integer "particle_id"
@@ -69,15 +72,19 @@ ActiveRecord::Schema.define(version: 2019_09_28_093003) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "full_sku"
+    t.integer "skin_id"
+    t.boolean "australium"
     t.index ["marketplace_sale_id"], name: "index_marketplace_sale_items_on_marketplace_sale_id"
+    t.index ["quality_id"], name: "quality_id"
   end
 
   create_table "marketplace_sales", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.integer "earned_credit"
-    t.string "transaction_id"
-    t.datetime "date"
+    t.integer "earned_credit", null: false
+    t.string "transaction_id", null: false
+    t.datetime "date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["transaction_id"], name: "marketplace_sales_transaction_id"
   end
 
   create_table "scm_values", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -89,66 +96,40 @@ ActiveRecord::Schema.define(version: 2019_09_28_093003) do
 
   create_table "steam_trade_items", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "assetid"
-    t.integer "appid"
-    t.integer "contextid"
-    t.integer "defindex"
+    t.integer "appid", limit: 2
+    t.integer "contextid", limit: 2
+    t.integer "defindex", limit: 3
     t.boolean "craftable"
     t.string "skin_name"
-    t.integer "killstreak_tier_id"
-    t.integer "wear_id"
-    t.integer "particle_id"
-    t.integer "quality_id"
+    t.integer "killstreak_tier_id", limit: 1
+    t.integer "wear_id", limit: 1
+    t.integer "particle_id", limit: 2
+    t.integer "quality_id", limit: 1
     t.string "item_name"
     t.string "full_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "steam_trade_id", null: false
     t.boolean "is_their_item"
+    t.bigint "classid"
+    t.bigint "instanceid"
+    t.boolean "australium"
+    t.boolean "strange"
+    t.index ["quality_id", "is_their_item"], name: "steam_trade_items_quality_id_is_their_item"
+    t.index ["quality_id"], name: "steam_trade_items_quality_id"
     t.index ["steam_trade_id"], name: "index_steam_trade_items_on_steam_trade_id"
   end
 
   create_table "steam_trades", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.string "steamid_other"
-    t.datetime "traded_at"
+    t.string "steamid_other", limit: 17, null: false
+    t.datetime "traded_at", null: false
     t.integer "trade_offer_state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "trades", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.bigint "assetid"
-    t.integer "appid"
-    t.integer "contextid"
-    t.string "item_name"
-    t.integer "defindex"
-    t.boolean "craftable"
-    t.string "skin_name"
-    t.integer "killstreak_tier_id"
-    t.integer "wear_id"
-    t.integer "particle_id"
-    t.integer "quality_id"
-    t.date "purchased_at"
-    t.date "sold_at"
-    t.decimal "keys_spent", precision: 13, scale: 2
-    t.integer "scm_spent"
-    t.integer "usd_spent"
-    t.decimal "items_spent", precision: 13, scale: 2
-    t.decimal "keys_received", precision: 13, scale: 2
-    t.integer "scm_received"
-    t.integer "usd_received"
-    t.decimal "items_received", precision: 13, scale: 2
-    t.text "notes", collation: "utf8mb4_unicode_ci"
-    t.string "steamid"
-    t.string "steamid_other"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "full_name"
-    t.bigint "purchase_steam_trade_id"
-    t.string "purchase_marketplace_purchase_id"
-    t.string "purchase_market_listing_id"
-    t.bigint "sale_steam_trade_id"
-    t.string "sale_marketplace_sale_id"
-    t.string "sale_market_listing_id"
+    t.bigint "tradeofferid", null: false
+    t.string "steamid", limit: 17, null: false
+    t.index ["steamid"], name: "steam_trades_steamid"
+    t.index ["steamid_other"], name: "steam_trades_steamid_other"
   end
 
   create_table "usd_values", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -156,6 +137,21 @@ ActiveRecord::Schema.define(version: 2019_09_28_093003) do
     t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "superadmin_role", default: false
+    t.boolean "supervisor_role", default: false
+    t.boolean "user_role", default: true
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "marketplace_sale_items", "marketplace_sales"

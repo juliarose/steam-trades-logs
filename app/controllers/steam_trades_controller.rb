@@ -1,15 +1,30 @@
 class SteamTradesController < ApplicationController
+  load_and_authorize_resource
+  
   before_action :set_steam_trade, only: [:show, :edit, :update, :destroy]
 
   # GET /steam_trades
   # GET /steam_trades.json
   def index
-    @steam_trades = SteamTrade.all
+    query_params = {
+        :full_name => params[:name],
+        :steamid => params[:steamid]
+    }.compact
+    
+    @steam_trades = SteamTrade
+      .includes(:steam_trade_items => :item)
+      .where(query_params)
+      .order('traded_at DESC')
+      .paginate(page: params[:page], per_page: 20)
   end
 
   # GET /steam_trades/1
   # GET /steam_trades/1.json
   def show
+    @received_items, @given_items = SteamTradeItem
+      .preload(:item)
+      .where(:steam_trade_id => @steam_trade.id)
+      .partition(&:is_their_item)
   end
 
   # GET /steam_trades/new
@@ -69,6 +84,6 @@ class SteamTradesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def steam_trade_params
-      params.require(:steam_trade).permit(:steamid, :steamid_other, :traded_at, :trade_offer_state, :notes)
+      params.require(:steam_trade).permit(:steamid, :steamid_other, :traded_at, :trade_offer_state)
     end
 end

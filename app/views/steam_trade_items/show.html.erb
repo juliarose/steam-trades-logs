@@ -1,44 +1,48 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Name:</strong>
+  <%= @steam_trade_item.full_name %>
+</p>
+
+<p>
   <strong>Assetid:</strong>
-  <%= @detail_item.assetid %>
+  <%= @steam_trade_item.assetid %>
 </p>
 
 <p>
   <strong>Appid:</strong>
-  <%= @detail_item.appid %>
+  <%= @steam_trade_item.appid %>
 </p>
 
 <p>
   <strong>Contextid:</strong>
-  <%= @detail_item.contextid %>
+  <%= @steam_trade_item.contextid %>
 </p>
 
 <p>
   <strong>Defindex:</strong>
-  <%= @detail_item.defindex %>
+  <%= @steam_trade_item.defindex %>
 </p>
 
 <p>
   <strong>Craftable:</strong>
-  <%= @detail_item.craftable %>
+  <%= @steam_trade_item.craftable %>
 </p>
 
 <p>
   <strong>Skin name:</strong>
-  <%= @detail_item.skin_name %>
+  <%= @steam_trade_item.skin_name %>
 </p>
 
 <p>
   <strong>Killstreak tier:</strong>
-  <%= @detail_item.killstreak_tier_id %>
+  <%= @steam_trade_item.killstreak_tier_id %>
 </p>
 
 <p>
   <strong>Wear:</strong>
-  <%= @detail_item.wear_id %>
+  <%= @steam_trade_item.wear_id %>
 </p>
 
-<%= link_to 'Edit', edit_detail_item_path(@detail_item) %> |
-<%= link_to 'Back', detail_items_path %>
+<%= link_to 'Edit', edit_steam_trade_item_path(@steam_trade_item) if current_user && current_user.superadmin_role? %>

@@ -1,6 +1,6 @@
-class CreateDetailItems < ActiveRecord::Migration[6.0]
+class CreateSteamTradeItems < ActiveRecord::Migration[6.0]
   def change
-    create_table :detail_items do |t|
+    create_table :steam_trade_items do |t|
       t.bigint :assetid
       t.integer :appid
       t.integer :contextid

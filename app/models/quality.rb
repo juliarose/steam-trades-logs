@@ -2,7 +2,7 @@ class Quality < ActiveRecord::Base
   establish_connection STEAM_DB
   
   def self.all_cache
-    @all_cache ||= Rails.cache.fetch('quality/all', :expires_in => 24.hours) { all.to_a } 
+    @all_cache ||= Rails.cache.fetch("quality/all", :expires_in => 24.hours) { all.to_a } 
   end
   
   def self.find_by_name(value)
@@ -15,10 +15,6 @@ class Quality < ActiveRecord::Base
   
   def self.find_by_color(value)
     all_cache.detect { |c| c.color.upcase == value.upcase }
-  end
-  
-  def self.unique
-    find_by_name('Unique')
   end
   
   def self.unknown

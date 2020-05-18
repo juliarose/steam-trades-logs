@@ -1,15 +1,15 @@
-require 'date'
+require "date"
 
+# unused - but may use later on
 class Trade < ApplicationRecord
-  extend NameParser
   include LogItem
   
   validates_presence_of :item_name, :purchased_at
   
-  monetize :usd_spent, as: 'usd_spent_money', :allow_nil => true
-  monetize :scm_spent, as: 'scm_spent_money', :allow_nil => true
-  monetize :usd_received, as: 'usd_received_money', :allow_nil => true
-  monetize :scm_received, as: 'scm_received_money', :allow_nil => true
+  monetize :usd_spent, as: "usd_spent_money", :allow_nil => true
+  monetize :scm_spent, as: "scm_spent_money", :allow_nil => true
+  monetize :usd_received, as: "usd_received_money", :allow_nil => true
+  monetize :scm_received, as: "scm_received_money", :allow_nil => true
     
   has_one :item,
     :foreign_key => :defindex,
@@ -66,7 +66,7 @@ class Trade < ApplicationRecord
       )
       # find the specific listing which matches most closely with this record
       market_listing = market_listings.find do |record|
-        # get the difference of the listing's date and the date on log
+        # get the difference of the listing"s date and the date on log
         date_difference = (record.date_acted - self.purchased_at).to_i.abs
         # check that the difference is within a day
         within_one_day_of = date_difference <= 1
@@ -87,7 +87,7 @@ class Trade < ApplicationRecord
       # current there is no source for this
       nil
     elsif !self.keys_spent.nil? || !self.items_spent.nil?
-      # find steam trade where it's like this
+      # find steam trade where it"s like this
       steam_trade_items = SteamTradeItem.where(
         :item_name => self.item_name,
         :quality_id => self.quality_id,
@@ -104,7 +104,7 @@ class Trade < ApplicationRecord
       )
       
       steam_trade = steam_trades.find do |record|
-        # get the difference of the listing's date and the date on log
+        # get the difference of the listing"s date and the date on log
         date_difference = (record.traded_at.to_date - self.purchased_at).to_i.abs
         # check that the difference is within a day
         within_one_day_of = date_difference <= 1
@@ -138,7 +138,7 @@ class Trade < ApplicationRecord
       # the items belong to sales, and the date for the sale is contained within the parent record
       marketplace_sales = MarketplaceSale.where(:id => marketplace_sale_items.map(&:id))
       marketplace_sale = marketplace_sales.find do |record|
-        # get the difference of the listing's date and the date on log
+        # get the difference of the listing"s date and the date on log
         date_difference = (marketplace_sale.date - self.purchased_at).to_i.abs
         # check that the difference is within a day
         within_one_day_of = date_difference <= 1
@@ -154,13 +154,6 @@ class Trade < ApplicationRecord
       marketplace_sale
     elsif !self.keys_received.nil? || !self.items_received.nil?
     end
-  end
-  
-  def bptf_price
-    BptfPrice.where(
-      :defindex => self.defindex,
-      :priceindex => self.particle_id || 0
-    )
   end
   
   def days_to_sale
@@ -230,15 +223,15 @@ class Trade < ApplicationRecord
   end
   
   def self.from_json(json)
-    parsed = self.parse_name(json['full_name'])
+    parsed = self.parse_name(json["full_name"])
     # merge parsed object with json
     # and convert all keys from symbols to strings
     data = json.clone.merge(parsed).stringify_keys
     
     # convert date strings to dates
     [
-      'purchased_at',
-      'sold_at'
+      "purchased_at",
+      "sold_at"
     ].each do |k|
       data[k] = Date.parse(data[k]) unless data[k].nil?
     end

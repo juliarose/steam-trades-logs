@@ -1,10 +1,12 @@
 class MarketplaceSaleItemsController < ApplicationController
+  load_and_authorize_resource
+  
   before_action :set_marketplace_sale_item, only: [:show, :edit, :update, :destroy]
 
   # GET /marketplace_sale_items
   # GET /marketplace_sale_items.json
   def index
-    @marketplace_sale_items = MarketplaceSaleItem.all
+    @marketplace_sale_items = MarketplaceSaleItem.all.paginate(page: params[:page], per_page: 20)
   end
 
   # GET /marketplace_sale_items/1
@@ -69,6 +71,6 @@ class MarketplaceSaleItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def marketplace_sale_item_params
-      params.require(:marketplace_sale_item).permit(:marketplace_sale_id, :price, :item_id, :item_original_id, :full_name, :defindex, :particle_id, :quality_id, :killstreak_tier_id, :skin_name, :item_name, :wear_id, :sku, :full_sku)
+      params.require(:marketplace_sale_item).permit(:marketplace_sale_id, :price, :assetid, :asset_original_id, :full_name, :defindex, :particle_id, :quality_id, :killstreak_tier_id, :skin_name, :item_name, :wear_id, :sku, :full_sku)
     end
 end

@@ -1,10 +1,12 @@
 class SteamTradeItemsController < ApplicationController
+  load_and_authorize_resource
+  
   before_action :set_steam_trade_item, only: [:show, :edit, :update, :destroy]
 
   # GET /steam_trade_items
   # GET /steam_trade_items.json
   def index
-    @steam_trade_items = DetailItem.all
+    @steam_trade_items = SteamTradeItem.all.paginate(page: params[:page], per_page: 20)
   end
 
   # GET /steam_trade_items/1
@@ -14,7 +16,7 @@ class SteamTradeItemsController < ApplicationController
 
   # GET /steam_trade_items/new
   def new
-    @steam_trade_item = DetailItem.new
+    @steam_trade_item = SteamTradeItem.new
   end
 
   # GET /steam_trade_items/1/edit
@@ -63,7 +65,7 @@ class SteamTradeItemsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_stream_trade_item
+    def set_steam_trade_item
       @steam_trade_item = SteamTradeItem.find(params[:id])
     end
 

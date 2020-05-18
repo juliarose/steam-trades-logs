@@ -5,10 +5,12 @@
   <%= @steam_trade.steamid %>
 </p>
 
-<p>
-  <strong>Steamid other:</strong>
-  <%= @steam_trade.steamid_other %>
-</p>
+<% if current_user && current_user.superadmin_role? %>
+  <p>
+    <strong>Steamid other:</strong>
+    <%= @steam_trade.steamid_other %>
+  </p>
+<% end %>
 
 <p>
   <strong>Traded at:</strong>
@@ -16,14 +18,13 @@
 </p>
 
 <p>
-  <strong>Trade offer state:</strong>
-  <%= @steam_trade.trade_offer_state %>
+  <strong>Given items:</strong>
+  <%= render partial: 'steam_trade_items/steam_trade_items', :locals => { steam_trade_items: @given_items, who: "my" } %>
 </p>
 
 <p>
-  <strong>Notes:</strong>
-  <%= @steam_trade.notes %>
+  <strong>Received items:</strong>
+  <%= render partial: 'steam_trade_items/steam_trade_items', :locals => { steam_trade_items: @received_items, who: "them" } %>
 </p>
 
-<%= link_to 'Edit', edit_steam_trade_path(@steam_trade) %> |
-<%= link_to 'Back', steam_trades_path %>
+<%= link_to 'Edit', edit_steam_trade_path(@steam_trade) if current_user && current_user.superadmin_role? %>

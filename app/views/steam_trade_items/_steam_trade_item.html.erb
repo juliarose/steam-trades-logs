@@ -1,0 +1,5 @@
+<%= content_tag(:div, class: get_steam_trade_item_class(steam_trade_item), style: get_steam_trade_style(steam_trade_item)) do %>
+  <% if count %>
+    <span class="count"><%= " #{count}" %></span>
+  <% end %>
+<% end %>

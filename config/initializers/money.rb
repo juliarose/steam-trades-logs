@@ -79,7 +79,8 @@ MoneyRails.configure do |config|
   #
   
   config.rounding_mode = BigDecimal::ROUND_HALF_UP
-
+  config.no_cents_if_whole = false
+  
   # Set default money format globally.
   # Default value is nil meaning "ignore this option".
   # Example:

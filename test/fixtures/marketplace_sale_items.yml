@@ -3,8 +3,8 @@
 one:
   marketplace_sale: one
   price: 1
-  item_id: 1
-  item_original_id: 1
+  assetid: 1
+  asset_original_id: 1
   full_name: MyString
   defindex: 1
   particle_id: 1
@@ -18,8 +18,8 @@ one:
 two:
   marketplace_sale: two
   price: 1
-  item_id: 1
-  item_original_id: 1
+  assetid: 1
+  asset_original_id: 1
   full_name: MyString
   defindex: 1
   particle_id: 1

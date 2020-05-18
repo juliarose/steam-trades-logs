@@ -12,26 +12,27 @@ class BptfPrice < ApplicationRecord
     :class_name => :Quality
   
   def stats_url
-    priceindexpath = self.priceindex if self.priceindex != 0
-    australium_name = 'Australium' if self.australium
+    priceindex = self.priceindex unless self.priceindex === 0
     
-    paths = [
+    "http://backpack.tf/stats/" + [
       self.quality.name,
-      australium_name,
+      self.australium_name,
       self.item.item_name,
-      self.tradableindex,
-      self.craftableindex,
-      priceindexpath
-    ].compact
-    
-    return 'http://backpack.tf/stats/' + paths.join('/')
+      self.tradable_name,
+      self.craftable_name,
+      priceindex
+    ].join("/")
   end
   
-  def tradableindex
-    return self.tradable ? 'Tradable' : 'Non-Tradable'
+  def austalium_name
+    "Australium" if self.australium
   end
   
-  def craftableindex
-    return self.craftable ? 'Craftable' : 'Non-Craftable'
+  def tradable_name
+    self.tradable ? "Tradable" : "Non-Tradable"
+  end
+  
+  def craftable_name
+    self.craftable ? "Craftable" : "Non-Craftable"
   end
 end

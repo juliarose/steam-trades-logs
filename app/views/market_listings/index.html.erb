@@ -2,32 +2,9 @@
 
 <h1>Market Listings</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Date acted</th>
-      <th>Date listed</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @market_listings.each do |market_listing| %>
-      <tr>
-        <td><b><%= market_listing.is_credit ? '+' : '-' %></b></td>
-        <td><img src="<%= market_listing.full_icon_url %>"/></td>
-        <td><%= link_to market_listing.market_hash_name, market_listing %></td>
-        <td><%= market_listing.price_money.format %></td>
-        <td><%= market_listing.date_acted %></td>
-        <td><%= market_listing.date_listed %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= will_paginate @market_listings %>
+<%= render @market_listings %>
+<%= will_paginate @market_listings %>
 
 <br>
 

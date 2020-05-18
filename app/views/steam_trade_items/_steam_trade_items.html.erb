@@ -1,0 +1,10 @@
+<% grouped = group_steam_trade_items(steam_trade_items) %>
+
+<%= content_tag(:div, class: ["steam-trade-items", who].compact) do %>
+  <% if grouped[440] %>
+    <% grouped[440].each do |k, group| %>
+      <% count = "x#{group.count}" if group.count > 1 %>
+      <%= render partial: 'steam_trade_items/steam_trade_item', :locals => { steam_trade_item: group.first, count: count } %>
+    <% end %>
+  <% end %>
+<% end %>
