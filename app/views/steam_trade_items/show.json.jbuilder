@@ -1,1 +1,1 @@
-json.partial! "detail_items/detail_item", detail_item: @detail_item
+json.partial! "steam_trade_items/steam_trade_item", steam_trade_item: @steam_trade_item

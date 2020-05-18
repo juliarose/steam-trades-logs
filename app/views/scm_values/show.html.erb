@@ -10,5 +10,4 @@
   <%= @scm_value.date %>
 </p>
 
-<%= link_to 'Edit', edit_scm_value_path(@scm_value) %> |
-<%= link_to 'Back', scm_values_path %>
+<%= link_to 'Edit', edit_scm_value_path(@scm_value) if current_user && current_user.superadmin_role? %>

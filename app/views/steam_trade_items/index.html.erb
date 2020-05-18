@@ -18,19 +18,19 @@
   </thead>
 
   <tbody>
-    <% @detail_items.each do |detail_item| %>
+    <% @steam_trade_items.each do |steam_trade_item| %>
       <tr>
-        <td><%= detail_item.assetid %></td>
-        <td><%= detail_item.appid %></td>
-        <td><%= detail_item.contextid %></td>
-        <td><%= detail_item.defindex %></td>
-        <td><%= detail_item.craftable %></td>
-        <td><%= detail_item.skin_name %></td>
-        <td><%= detail_item.killstreak_tier_id %></td>
-        <td><%= detail_item.wear_id %></td>
-        <td><%= link_to 'Show', detail_item %></td>
-        <td><%= link_to 'Edit', edit_detail_item_path(detail_item) %></td>
-        <td><%= link_to 'Destroy', detail_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= steam_trade_item.assetid %></td>
+        <td><%= steam_trade_item.appid %></td>
+        <td><%= steam_trade_item.contextid %></td>
+        <td><%= steam_trade_item.defindex %></td>
+        <td><%= steam_trade_item.craftable %></td>
+        <td><%= steam_trade_item.skin_name %></td>
+        <td><%= steam_trade_item.killstreak_tier_id %></td>
+        <td><%= steam_trade_item.wear_id %></td>
+        <td><%= link_to 'Show', steam_trade_item %></td>
+        <td><%= link_to 'Edit', edit_steam_trade_item_path(steam_trade_item) %></td>
+        <td><%= link_to 'Destroy', steam_trade_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +38,4 @@
 
 <br>
 
-<%= link_to 'New Detail Item', new_detail_item_path %>
+<%= link_to 'New Detail Item', new_steam_trade_item_path %>

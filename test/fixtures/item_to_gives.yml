@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  steam_trade: one
-  steam_trade_items: one
-
-two:
-  steam_trade: two
-  steam_trade_items: two

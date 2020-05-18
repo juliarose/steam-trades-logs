@@ -10,5 +10,4 @@
   <%= @key_value.date %>
 </p>
 
-<%= link_to 'Edit', edit_key_value_path(@key_value) %> |
-<%= link_to 'Back', key_values_path %>
+<%= link_to 'Edit', edit_key_value_path(@key_value) if current_user && current_user.superadmin_role? %>

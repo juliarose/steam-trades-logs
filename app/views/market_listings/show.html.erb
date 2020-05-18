@@ -95,5 +95,4 @@
   <%= @market_listing.seller %>
 </p>
 
-<%= link_to 'Edit', edit_market_listing_path(@market_listing) %> |
-<%= link_to 'Back', market_listings_path %>
+<%= link_to 'Edit', edit_market_listing_path(@market_listing) if current_user && current_user.superadmin_role? %>

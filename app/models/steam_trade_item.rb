@@ -1,46 +1,69 @@
 class SteamTradeItem < ApplicationRecord
-  extend NameParser
+  include SteamItem
   
   belongs_to :steam_trade
+  has_one :item,
+    :foreign_key => :defindex,
+    :primary_key => :defindex
   
+  scope :received_items, -> { where(is_their_item: true) }
+  scope :given_items, -> { where(is_their_item: false) }
+  
+  # not all data is formatted in the same manner,
+  # some may be missing values or use a differenf format
+  # but this should parse across all formats
   def self.from_json(json)
     # create a clone so we do not modify the original object
-    data = json.clone
-    
-    unless data['appdata'].nil?
-      # add the appdata to the original object
-      data.merge!(data['appdata'])
-    end
+    data = json.clone.deep_symbolize_keys
     
     # get the most descriptive name for this item
-    name = data['full_name'] || data['market_hash_name'] || data['market_name']
+    name = data[:full_name] || data[:market_hash_name] || data[:market_name]
+    
+    # we want these as integers
+    data[:appid] = data[:appid].to_i if data[:appid]
+    data[:contextid] = data[:contextid].to_i if data[:contextid]
+    
+    # this is used for finding the associated item in the schema for this item
+    # since we also want to include an item_name property for our items
+    defindex = data[:appdata][:defindex] if data[:appdata] && data[:appid] == 440
     
     # get the name of the skin
-    parsed = self.parse_name(name)
+    parsed = ItemParser.parse_name(name, defindex)
     
     unless parsed.nil?
       # merge the keys from the parsed item
       data.merge!(parsed.stringify_keys)
     end
     
-    # map related keys to column names
-    {
-      'quality' => 'quality_id',
-      'particle' => 'particle_id',
-      'wear' => 'wear_id',
-      'killstreak_tier' => 'killstreak_tier_id'
-    }.each do |k, v|
-      data[v] = data[k]
+    unless data[:appdata].nil?
+      # add the appdata to the original object
+      data.merge!(data[:appdata])
     end
     
-    if data['particle_id'].nil? && !data['priceindex'].zero?
-      # take particle id from priceindex
-      data['particle_id'] = data['priceindex']
+    unless data[:full_name]
+      # just use what name we could get
+      data[:full_name] = name
+    end
+    
+    # map related keys to column names
+    {
+      :quality => :quality_id,
+      :particle => :particle_id,
+      :wear => :wear_id,
+      :killstreak_tier => :killstreak_tier_id,
+      :priceindex => :particle_id
+    }.each do |k, v|
+      data[v] = data[k] unless data[k].nil?
+    end
+    
+    if data[:priceindex] === 0
+      # make 0 values null
+      data[:priceindex] = nil
     end
     
     # delete non-column keys before creating our record
-    data.delete_if do |key, value|
-      !SteamTradeItem.column_names.include?(key)
+    data = data.except(:id).delete_if do |key, value|
+      !SteamTradeItem.column_names.include?(key.to_s)
     end
     
     SteamTradeItem.new(data)

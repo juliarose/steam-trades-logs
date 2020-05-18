@@ -1,6 +1,13 @@
-# config files containing secrets
+# Config files
 /config/application.yml
 /config/database.yml
+/config/credentials.yml.enc
+
+# Project files
+*.komodoproject
+
+# Deployment script
+/deploy.sh
 
 # See https://help.github.com/articles/ignoring-files for more about ignoring files.
 #

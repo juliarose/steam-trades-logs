@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Spent</th>
+    <th>Received</th>
+  </thead>
+  <% @stats.each do |k, stat| %>
+    <tr>
+      <td>
+        <%= stat[:name] %>
+      </td>  
+      <td>
+        <% if stat[:monetary] %>
+          <%= humanized_money_with_symbol stat[:spent] %>
+        <% else %>
+          <%= stat[:spent] %>
+        <% end %>
+      </td>  
+      <td>
+        <% if stat[:monetary] %>
+          <%= humanized_money_with_symbol stat[:received] %>
+        <% else %>
+          <%= stat[:received] %>
+        <% end %>
+      </td>  
+    </tr>
+  <% end %>
+</table>

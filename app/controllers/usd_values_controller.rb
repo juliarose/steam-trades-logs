@@ -1,4 +1,6 @@
 class UsdValuesController < ApplicationController
+  load_and_authorize_resource
+  
   before_action :set_usd_value, only: [:show, :edit, :update, :destroy]
 
   # GET /usd_values

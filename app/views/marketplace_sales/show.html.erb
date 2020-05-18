@@ -15,5 +15,4 @@
   <%= @marketplace_sale.date %>
 </p>
 
-<%= link_to 'Edit', edit_marketplace_sale_path(@marketplace_sale) %> |
-<%= link_to 'Back', marketplace_sales_path %>
+<%= link_to 'Edit', edit_marketplace_sale_path(@marketplace_sale) if current_user && current_user.superadmin_role? %>

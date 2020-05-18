@@ -1,8 +1,6 @@
 class Particle < ActiveRecord::Base
   establish_connection STEAM_DB
   
-  self.table_name = :attribute_controlled_attached_particles
-  
   scope :visible, -> { where(visible: true) }
   
   has_one :series,
@@ -18,7 +16,7 @@ class Particle < ActiveRecord::Base
     :foreign_key => :priceindex
   
   def self.all_cache
-    @all_cache ||= Rails.cache.fetch('particle/all', :expires_in => 24.hours) { all.to_a } 
+    @all_cache ||= Rails.cache.fetch("particle/all", :expires_in => 24.hours) { all.to_a } 
   end
   
   def self.find_by_value(value)
@@ -34,7 +32,7 @@ class Particle < ActiveRecord::Base
   end
   
   def self.unknown(options = {})
-    Particle.new(options.merge(:value => 0, :name => 'Unknown'))
+    Particle.new(options.merge(:value => 0, :name => "Unknown"))
   end
   
   def visible

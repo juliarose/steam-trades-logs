@@ -2,7 +2,7 @@ class KillstreakTier < ActiveRecord::Base
   establish_connection STEAM_DB
   
   def self.all_cache
-    @all_cache ||= Rails.cache.fetch('killstreak_tier/all', :expires_in => 24.hours) { all.to_a } 
+    @all_cache ||= Rails.cache.fetch("killstreak_tier/all", :expires_in => 24.hours) { all.to_a } 
   end
 
   def self.find_by_float_value(float_value)
@@ -11,9 +11,5 @@ class KillstreakTier < ActiveRecord::Base
 
   def self.flush_all_cache
     @all_cache = nil
-  end
-
-  def self.unknown(options = {})
-    KillstreakTier.new(options.merge(:float_value => 0, :name => "Unknown Killstreak"))
   end
 end

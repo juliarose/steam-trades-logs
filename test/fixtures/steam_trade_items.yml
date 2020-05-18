@@ -1,0 +1,18 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+kaw_bot_dogger:
+  assetid: 7954348288
+  appid: 440
+  contextid: 2
+  defindex: 30018
+  craftable: 1
+  particle_id: 56
+  quality_id: 5
+  item_name: MyString
+  full_name: MyString
+  created_at: 2020-04-23
+  updated_at: 2020-04-23
+  is_their_item: 1
+  classid: 172647522
+  instanceid: 171053845
+  steam_trade_id: 1

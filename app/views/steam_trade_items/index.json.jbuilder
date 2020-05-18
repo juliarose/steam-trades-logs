@@ -1,1 +1,1 @@
-json.array! @detail_items, partial: "detail_items/detail_item", as: :detail_item
+json.array! @steam_trade_items, partial: "steam_trade_items/steam_trade_item", as: :steam_trade_item

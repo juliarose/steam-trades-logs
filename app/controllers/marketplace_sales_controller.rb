@@ -1,10 +1,12 @@
 class MarketplaceSalesController < ApplicationController
+  load_and_authorize_resource
+  
   before_action :set_marketplace_sale, only: [:show, :edit, :update, :destroy]
 
   # GET /marketplace_sales
   # GET /marketplace_sales.json
   def index
-    @marketplace_sales = MarketplaceSale.all
+    @marketplace_sales = MarketplaceSale.all.paginate(page: params[:page], per_page: 20)
   end
 
   # GET /marketplace_sales/1

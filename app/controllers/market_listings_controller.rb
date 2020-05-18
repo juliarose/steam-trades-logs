@@ -1,10 +1,12 @@
 class MarketListingsController < ApplicationController
+  load_and_authorize_resource
+  
   before_action :set_market_listing, only: [:show, :edit, :update, :destroy]
 
   # GET /market_listings
   # GET /market_listings.json
   def index
-    @market_listings = MarketListing.all
+    @market_listings = MarketListing.all.paginate(page: params[:page], per_page: 20)
   end
 
   # GET /market_listings/1

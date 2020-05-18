@@ -3,13 +3,11 @@ class Series < ActiveRecord::Base
   
   has_many :effects,
     :foreign_key => :series_id,
-    :primary_key => :value,
-    :class_name => :AttributeControlledAttachedParticle
+    :primary_key => :value
   
-  belongs_to :attribute_controlled_attached_particle,
+  belongs_to :particle,
     :foreign_key => :value,
-    :primary_key => :series_id,
-    :class_name => :AttributeControlledAttachedParticle
+    :primary_key => :series_id
   
   validates :value, :presence => true, :uniqueness => true
   validates :name, :presence => true

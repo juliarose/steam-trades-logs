@@ -1,10 +1,10 @@
-<%= form_with(model: detail_item, local: true) do |form| %>
-  <% if detail_item.errors.any? %>
+<%= form_with(model: steam_trade_item, local: true) do |form| %>
+  <% if steam_trade_item.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(detail_item.errors.count, "error") %> prohibited this detail_item from being saved:</h2>
+      <h2><%= pluralize(steam_trade_item.errors.count, "error") %> prohibited this steam_trade_item from being saved:</h2>
 
       <ul>
-        <% detail_item.errors.full_messages.each do |message| %>
+        <% steam_trade_item.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

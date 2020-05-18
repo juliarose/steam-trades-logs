@@ -17,9 +17,9 @@ class MarketplaceSaleItemsTest < ApplicationSystemTestCase
     fill_in "Defindex", with: @marketplace_sale_item.defindex
     fill_in "Full name", with: @marketplace_sale_item.full_name
     fill_in "Full sku", with: @marketplace_sale_item.full_sku
-    fill_in "Item", with: @marketplace_sale_item.item_id
+    fill_in "Item", with: @marketplace_sale_item.assetid
     fill_in "Item name", with: @marketplace_sale_item.item_name
-    fill_in "Item original", with: @marketplace_sale_item.item_original_id
+    fill_in "Item original", with: @marketplace_sale_item.asset_original_id
     fill_in "Killstreak tier", with: @marketplace_sale_item.killstreak_tier_id
     fill_in "Marketplace sale", with: @marketplace_sale_item.marketplace_sale_id
     fill_in "Particle", with: @marketplace_sale_item.particle_id
@@ -41,9 +41,9 @@ class MarketplaceSaleItemsTest < ApplicationSystemTestCase
     fill_in "Defindex", with: @marketplace_sale_item.defindex
     fill_in "Full name", with: @marketplace_sale_item.full_name
     fill_in "Full sku", with: @marketplace_sale_item.full_sku
-    fill_in "Item", with: @marketplace_sale_item.item_id
+    fill_in "Item", with: @marketplace_sale_item.assetid
     fill_in "Item name", with: @marketplace_sale_item.item_name
-    fill_in "Item original", with: @marketplace_sale_item.item_original_id
+    fill_in "Item original", with: @marketplace_sale_item.asset_original_id
     fill_in "Killstreak tier", with: @marketplace_sale_item.killstreak_tier_id
     fill_in "Marketplace sale", with: @marketplace_sale_item.marketplace_sale_id
     fill_in "Particle", with: @marketplace_sale_item.particle_id

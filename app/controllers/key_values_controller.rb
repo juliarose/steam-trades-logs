@@ -1,4 +1,6 @@
 class KeyValuesController < ApplicationController
+  load_and_authorize_resource
+  
   before_action :set_key_value, only: [:show, :edit, :update, :destroy]
 
   # GET /key_values
