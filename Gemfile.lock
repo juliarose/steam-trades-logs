@@ -200,8 +200,8 @@ GEM
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     public_suffix (4.0.1)
-    puma (3.12.1)
-    puma (3.12.1-java)
+    puma (3.12.4)
+    puma (3.12.4-java)
     rack (2.2.2)
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
@@ -336,7 +336,7 @@ DEPENDENCIES
   materialize-sass
   money-rails (~> 1.12)
   mysql2 (~> 0.5.2)
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 6.0.2.2)
   rails_admin!
   redis (~> 4.0)
