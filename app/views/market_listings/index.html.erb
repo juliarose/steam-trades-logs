@@ -8,4 +8,6 @@
 
 <br>
 
-<%= link_to 'New Market Listing', new_market_listing_path %>
+<% if can? :manage, MarketListing %>
+  <%= link_to 'New Market Listing', new_market_listing_path %>
+<% end %>

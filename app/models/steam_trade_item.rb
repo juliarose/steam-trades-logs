@@ -1,5 +1,6 @@
 class SteamTradeItem < ApplicationRecord
   include SteamItem
+  include LogItem
   
   belongs_to :steam_trade
   has_one :item,
@@ -8,6 +9,16 @@ class SteamTradeItem < ApplicationRecord
   
   scope :received_items, -> { where(is_their_item: true) }
   scope :given_items, -> { where(is_their_item: false) }
+  
+  def bptf_price
+    BptfPrice.where({
+      :quality_id => self.quality_id,
+      :priceindex => self.particle_id,
+      :craftable => self.craftable,
+      :australium => self.australium,
+      :defindex => self.defindex
+    }).first
+  end
   
   # not all data is formatted in the same manner,
   # some may be missing values or use a differenf format

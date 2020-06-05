@@ -6,11 +6,17 @@ class SteamTradesController < ApplicationController
   # GET /steam_trades
   # GET /steam_trades.json
   def index
+    # find the bot if this is a nested route
+    @bot = Bot.find(params[:bot_id]) if params[:bot_id]
+    
+    steamid = @bot ? @bot.uid : params[:steamid]
+    
     query_params = {
         :full_name => params[:name],
-        :steamid => params[:steamid]
+        :steamid => steamid
     }.compact
     
+    @bot_id = params[:bot_id]
     @steam_trades = SteamTrade
       .includes(:steam_trade_items => :item)
       .where(query_params)

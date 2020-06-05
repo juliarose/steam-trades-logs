@@ -1,13 +1,25 @@
 require "date"
 
 class SteamTrade < ApplicationRecord
+  includes LogItem
+  
   has_many :steam_trade_items, dependent: :destroy
   
   # only store one trade with tradeofferid for each steamid
   validates_uniqueness_of :tradeofferid, scope: :steamid
   
   # exclude bots from query
-  scope :non_bot, -> { where("steamid_other NOT IN (?)", BOTS + MARKETPLACE_BOTS) }
+  scope :non_bot, -> { where("steamid_other NOT IN (?)", BOTS) }
+  
+  has_one :bot,
+    :primary_key => :steamid,
+    :foreign_key => :uid
+  
+  def is_unusual_sale
+    self.steam_trade_items.any? do |steam_trade_item|
+      !steam_trade_item.is_their_item && steam_trade_item.quality_id == 5
+    end
+  end
   
   # gets unusual sales or purchases
   def self.sales_purchases(is_purchase, query_params = ActionController::Parameters.new)
@@ -15,7 +27,7 @@ class SteamTrade < ApplicationRecord
     query_params = {
       :is_their_item => is_purchase,
       :quality_id => 5
-    }.merge(query_params.permit(:full_name, :steamid)).compact
+    }.merge(query_params.permit(:full_name, :steamid, :steamid_other)).compact
     
     # build the query string for selecting items
     where_query_str = query_params.keys.map { |param| "#{param.to_s} = ?" }.join(" AND ")

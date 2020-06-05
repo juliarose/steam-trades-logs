@@ -9,4 +9,6 @@
 
 <br>
 
-<%= link_to 'New Trade', new_steam_trade_path if current_user && current_user.superadmin_role? %>
+<% if can? :manage, SteamTrade %>
+  <%= link_to 'New Trade', new_steam_trade_path %>
+<% end %>

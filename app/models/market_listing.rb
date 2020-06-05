@@ -38,6 +38,11 @@ class MarketListing < ApplicationRecord
     "https://steamcommunity-a.akamaihd.net/economy/image/#{self.icon_url}/#{size}fx#{size}f"
   end
   
+  # we don't care if these are craftable or not
+  def craftable
+    true
+  end
+  
   # gets unusual sales or purchases
   def self.sales_purchases(is_purchase, query_params = ActionController::Parameters.new)
     query_params = query_params.permit(:full_name)

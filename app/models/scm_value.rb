@@ -8,7 +8,7 @@ class ScmValue < ApplicationRecord
   end
   
   def self.find_by_date(date)
-    all_cache.find { |scm_value| date >= scm_value.date }
+    all_cache.find { |scm_value| date >= scm_value.date } || all_cache[0]
   end
   
   def self.flush_all_cache

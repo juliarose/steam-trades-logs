@@ -39,6 +39,7 @@ module ItemParser
       "u" => "particle_id",
       "w" => "wear_id",
       "pk" => "skin_id",
+      "strange" => "strange",
       "australium" => "australium",
       "uncraftable" => "uncraftable",
       "festive" => "festive"
@@ -185,7 +186,7 @@ module ItemParser
       :appid => 440,
       :contextid => 2,
       :craftable => true,
-      :australium => australium,
+      :australium => !!australium,
       :quality_id => quality && quality.value,
       :killstreak_tier_id => killstreak_tier && killstreak_tier.float_value,
       :wear_id => wear && wear.value,

@@ -26,4 +26,6 @@
 
 <br>
 
-<%= link_to 'New Key Value', new_key_value_path %>
+<% if can? :manage, KeyValue %>
+  <%= link_to 'New Key Value', new_key_value_path %>
+<% end %>

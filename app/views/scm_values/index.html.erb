@@ -26,4 +26,6 @@
 
 <br>
 
-<%= link_to 'New Scm Value', new_scm_value_path %>
+<% if can? :manage, ScmValue %>
+  <%= link_to 'New Scm Value', new_scm_value_path %>
+<% end %>

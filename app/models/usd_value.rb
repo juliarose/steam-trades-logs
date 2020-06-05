@@ -8,7 +8,7 @@ class UsdValue < ApplicationRecord
   end
   
   def self.find_by_date(date)
-    all_cache.find { |usd_value| date >= usd_value.date }
+    all_cache.find { |usd_value| date >= usd_value.date } || all_cache[0]
   end
   
   def self.flush_all_cache

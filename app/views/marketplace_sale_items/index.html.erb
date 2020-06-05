@@ -8,4 +8,6 @@
 
 <br>
 
-<%= link_to 'New Marketplace Sale Item', new_marketplace_sale_item_path %>
+<% if can? :manage, MarketplaceSaleItem %>
+  <%= link_to 'New Marketplace Sale Item', new_marketplace_sale_item_path %>
+<% end %>

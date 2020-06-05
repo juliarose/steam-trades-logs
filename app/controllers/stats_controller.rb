@@ -2,7 +2,7 @@ class StatsController < ApplicationController
   
   # table of totals
   def totals
-    rejected_steamids = BOTS + MARKETPLACE_BOTS
+    rejected_steamids = BOTS
     
     since = 7.days.ago
     steam_trade_items = SteamTradeItem
@@ -82,7 +82,7 @@ class StatsController < ApplicationController
   
   # creates charts of data since the given date
   def index
-    rejected_steamids = BOTS + MARKETPLACE_BOTS
+    rejected_steamids = BOTS
     since = 1.month.ago
     
     @steam_trades = SteamTrade.non_bot.where("traded_at >= ?", since)
@@ -127,39 +127,151 @@ class StatsController < ApplicationController
   end
   
   # gets details for the given  item
-  def item
-    # we want to exclude certain steamid"s from the results
-    rejected_steamids = BOTS + MARKETPLACE_BOTS
+  def search
+    query_params = helpers.parse_query_params(request.query_parameters)
     
-    @steam_trades = SteamTrade
-      .includes(:steam_trade_items => :item)
-      .where(
-          "steamid_other NOT IN (?) AND " +
-          "id in (SELECT steam_trade_id FROM steam_trade_items WHERE full_name = ?)",
-          # pass the query parameters
-          *[rejected_steamids,  params[:full_name]]
-      )
-      .order("traded_at DESC")
-    @marketplace_sale_items = MarketplaceSaleItem
-      .joins(:marketplace_sale)
-      .includes(:item)
-      .where(:full_name => params[:full_name])
-      .order("marketplace_sales.date DESC")
-    @market_listings = MarketListing
-      .includes(:item)
-      .where(:full_name => params[:full_name])
-      .order("date_acted DESC")
+    @steam_trades = helpers.steam_trades(query_params)
+    @market_listings = helpers.market_listings(query_params)
     
-    @steam_trades_sales, @steam_trades_purchases = @steam_trades.partition do |steam_trade|
-      steam_trade_item = steam_trade.steam_trade_items.find do |steam_trade_item|
-        steam_trade_item.full_name === params[:full_name]
-      end
-      
-      !steam_trade_item.is_their_item
+    @marketplace_sale_items = helpers
+      .marketplace_sale_items(query_params)
+      .paginate(page: params[:page], per_page: 20)
+    @steam_trades_sales = @steam_trades
+      .where(:steam_trade_items => query_params.clone.merge({ :is_their_item => false }))
+      .paginate(page: params[:page], per_page: 20)
+    @steam_trades_purchases = @steam_trades
+      .where(:steam_trade_items => query_params.clone.merge({ :is_their_item => true }))
+      .paginate(page: params[:page], per_page: 20)
+    @market_listings_sales = @market_listings
+      .where(:is_credit => true)
+      .paginate(page: params[:page], per_page: 20)
+    @market_listings_purchases = @market_listings
+      .where(:is_credit => false)
+      .paginate(page: params[:page], per_page: 20)
+    
+    # will preload all items associated with the associated trades
+    helpers.preload_steam_trade_items(@steam_trades_sales)
+    helpers.preload_steam_trade_items(@steam_trades_purchases)
+  end
+  
+  def sales
+    query_params = helpers.parse_query_params(request.query_parameters)
+    
+    @steam_trades = helpers.steam_trades(query_params)
+    @market_listings = helpers.market_listings(query_params)
+    
+    @marketplace_sale_items = helpers.marketplace_sale_items(query_params)
+      .paginate(page: params[:page], per_page: 20)
+    @steam_trades_sales = @steam_trades
+      .where(:steam_trade_items => query_params.clone.merge({ :is_their_item => false }))
+      .paginate(page: params[:page], per_page: 20)
+    @market_listings_sales = @market_listings
+      .where(:is_credit => true)
+      .paginate(page: params[:page], per_page: 20)
+    
+    # will preload all items associated with the associated trades
+    helpers.preload_steam_trade_items(@steam_trades_sales)
+  end
+  
+  def purchases
+    query_params = helpers.parse_query_params(request.query_parameters)
+    
+    @steam_trades = helpers.steam_trades(query_params)
+    @market_listings = helpers.market_listings(query_params)
+    
+    @steam_trades_purchases = @steam_trades
+      .where(:steam_trade_items => query_params.clone.merge({ :is_their_item => true }))
+      .paginate(page: params[:page], per_page: 20)
+    @market_listings_purchases = @market_listings
+      .where(:is_credit => false)
+      .paginate(page: params[:page], per_page: 20)
+    
+    # will preload all items associated with the associated trades
+    helpers.preload_steam_trade_items(@steam_trades_purchases)
+  end
+  
+  def steam_trades
+    query_params = helpers.parse_query_params(request.query_parameters)
+    
+    @steam_trades = helpers.steam_trades(query_params)
+    
+    @steam_trades_sales = @steam_trades
+      .where(:steam_trade_items => query_params.clone.merge({ :is_their_item => false }))
+      .paginate(page: params[:page], per_page: 20)
+    @steam_trades_purchases = @steam_trades
+      .where(:steam_trade_items => query_params.clone.merge({ :is_their_item => true }))
+      .paginate(page: params[:page], per_page: 20)
+    
+    # will preload all items associated with the associated trades
+    helpers.preload_steam_trade_items(@steam_trades_sales)
+    helpers.preload_steam_trade_items(@steam_trades_purchases)
+  end
+  
+  def steam_trades_sales
+    query_params = helpers.parse_query_params(request.query_parameters)
+    
+    @steam_trades = helpers.steam_trades(query_params)
+    @steam_trades_sales = @steam_trades
+      .where(:steam_trade_items => query_params.clone.merge({ :is_their_item => false }))
+      .paginate(page: params[:page], per_page: 20)
+    
+    respond_to do |format|
+      format.html { render template: "steam_trades/index" }
+      format.js { render template: "stats/steam_trades_sales" }
     end
+  end
+  
+  def steam_trades_purchases
+    query_params = helpers.parse_query_params(request.query_parameters)
     
-    @market_listings_sales, @market_listings_purchases = @market_listings.partition do |market_listing|
-      market_listing.is_credit
+    @steam_trades = helpers.steam_trades(query_params)
+    @steam_trades_purchases = @steam_trades
+      .where(:steam_trade_items => query_params.clone.merge({ :is_their_item => true }))
+      .paginate(page: params[:page], per_page: 20)
+    
+    respond_to do |format|
+      format.html { render template: "steam_trades/index" }
+      format.js { render template: "stats/steam_trades_purchases" }
+    end
+  end
+  
+  def marketplace_sales
+    query_params = helpers.parse_query_params(request.query_parameters)
+    
+    @marketplace_sale_items = helpers.marketplace_sale_items(query_params)
+      .paginate(page: params[:page], per_page: 20)
+    
+    respond_to do |format|
+      format.html { render template: "marketplace_sale_items/index" }
+      format.js { render template: "stats/marketplace_sales" }
+    end
+  end
+  
+  def market_listings_sales
+    query_params = helpers.parse_query_params(request.query_parameters)
+    
+    @market_listings = helpers.market_listings(query_params)
+    @market_listings_sales = @market_listings
+      .where(:is_credit => true)
+      .paginate(page: params[:page], per_page: 20)
+    
+    respond_to do |format|
+      format.html { render template: "market_listings/index" }
+      format.js { render template: "stats/market_listings_sales" }
+    end
+  end
+  
+  def market_listings_purchases
+    query_params = helpers.parse_query_params(request.query_parameters)
+    
+    @market_listings = helpers.market_listings(query_params)
+    @market_listings_purchases = @market_listings
+      .where(:is_credit => false)
+      .paginate(page: params[:page], per_page: 20)
+    
+    respond_to do |format|
+      format.html { render template: "market_listings/index" }
+      format.js { render template: "stats/market_listings_purchases" }
     end
   end
 end

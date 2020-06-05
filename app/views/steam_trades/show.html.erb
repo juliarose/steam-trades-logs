@@ -5,7 +5,7 @@
   <%= @steam_trade.steamid %>
 </p>
 
-<% if current_user && current_user.superadmin_role? %>
+<% if can? :manage, @steam_trade %>
   <p>
     <strong>Steamid other:</strong>
     <%= @steam_trade.steamid_other %>
@@ -27,4 +27,6 @@
   <%= render partial: 'steam_trade_items/steam_trade_items', :locals => { steam_trade_items: @received_items, who: "them" } %>
 </p>
 
-<%= link_to 'Edit', edit_steam_trade_path(@steam_trade) if current_user && current_user.superadmin_role? %>
+<% if can? :manage, @steam_trade %>
+  <%= link_to 'Edit', edit_steam_trade_path(@steam_trade) %>
+<% end %>

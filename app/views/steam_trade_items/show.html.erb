@@ -45,4 +45,6 @@
   <%= @steam_trade_item.wear_id %>
 </p>
 
-<%= link_to 'Edit', edit_steam_trade_item_path(@steam_trade_item) if current_user && current_user.superadmin_role? %>
+<% if can? :manage, @steam_trade_item %>
+  <%= link_to 'Edit', edit_steam_trade_item_path(@steam_trade_item) %>
+<% end %>

@@ -2,6 +2,27 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.nocraft {
+	border-color: #300 !important;
+	border-style: dotted !important
+}
+
+.strange {
+    
+}
+
+a.item-link:hover {
+	background: none;
+}
+
+.steam-trade-item.strange {
+	border-color: #cf6a32 !important;
+}
+
+.steam-trade-item.strange:hover {
+	border-color: #8a4620 !important;
+}
+
 .steam-trade-item {
     background-color: #ccc;
     background-position: center;

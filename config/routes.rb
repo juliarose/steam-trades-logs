@@ -21,9 +21,23 @@ Rails.application.routes.draw do
   
   resources :stats, only: [:index] do
     collection do
-      get "item/:full_name", action: :item
+      get :search
+      
+      get '/search/sales', to: 'stats#sales'
+      get '/search/purchases', to: 'stats#purchases'
+      get '/search/steam_trades', to: 'stats#steam_trades'
+      get '/search/marketplace', to: 'stats#marketplace_sales'
+      get '/search/marketplace/sales', to: 'stats#marketplace_sales'
+      get '/search/steam_trades/sales', to: 'stats#steam_trades_sales'
+      get '/search/steam_trades/purchases', to: 'stats#steam_trades_purchases'
+      get '/search/market_listings/sales', to: 'stats#market_listings_sales'
+      get '/search/market_listings/purchases', to: 'stats#market_listings_purchases'
       get :totals
     end
+  end
+  
+  resources :bots, only: [:index, :show] do
+    resources :steam_trades  
   end
   
   resources :key_values

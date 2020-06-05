@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_11_055559) do
+ActiveRecord::Schema.define(version: 2020_06_05_081117) do
 
   create_table "key_values", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.float "value"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 2020_05_11_055559) do
     t.string "skin_name"
     t.string "item_name"
     t.boolean "australium"
+    t.boolean "strange", default: false, null: false
+    t.boolean "craftable", default: false, null: false
     t.index ["quality_id", "is_credit"], name: "market_listings_quality_id_is_credit"
     t.index ["transaction_id"], name: "market_listings_transaction_id"
   end
@@ -73,7 +75,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_055559) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "full_sku"
     t.integer "skin_id"
-    t.boolean "australium"
+    t.boolean "australium", default: false, null: false
+    t.boolean "strange", default: false, null: false
+    t.boolean "craftable", default: false, null: false
     t.index ["marketplace_sale_id"], name: "index_marketplace_sale_items_on_marketplace_sale_id"
     t.index ["quality_id"], name: "quality_id"
   end
@@ -99,7 +103,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_055559) do
     t.integer "appid", limit: 2
     t.integer "contextid", limit: 2
     t.integer "defindex", limit: 3
-    t.boolean "craftable"
+    t.boolean "craftable", default: false, null: false
     t.string "skin_name"
     t.integer "killstreak_tier_id", limit: 1
     t.integer "wear_id", limit: 1
@@ -113,8 +117,8 @@ ActiveRecord::Schema.define(version: 2020_05_11_055559) do
     t.boolean "is_their_item"
     t.bigint "classid"
     t.bigint "instanceid"
-    t.boolean "australium"
-    t.boolean "strange"
+    t.boolean "australium", default: false, null: false
+    t.boolean "strange", default: false, null: false
     t.index ["quality_id", "is_their_item"], name: "steam_trade_items_quality_id_is_their_item"
     t.index ["quality_id"], name: "steam_trade_items_quality_id"
     t.index ["steam_trade_id"], name: "index_steam_trade_items_on_steam_trade_id"
