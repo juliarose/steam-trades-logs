@@ -4,21 +4,6 @@ Rails.application.routes.draw do
   
   devise_for :users
   
-  resources :sales, only: [:index] do
-    collection do
-      get :steam_trades
-      get :market_listings
-      get :marketplace_sales
-    end
-  end
-  
-  resources :purchases, only: [:index] do
-    collection do
-      get :steam_trades
-      get :market_listings
-    end
-  end
-  
   resources :stats, only: [:index] do
     collection do
       get :search
