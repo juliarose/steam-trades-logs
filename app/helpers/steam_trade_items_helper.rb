@@ -15,7 +15,7 @@ module SteamTradeItemsHelper
   
   # gets the classes for an element
   def get_steam_trade_item_class(steam_trade_item)
-    classes = ["steam-trade-item"]
+    classes = ["item"]
     
     if !steam_trade_item.craftable
       classes.push("nocraft")

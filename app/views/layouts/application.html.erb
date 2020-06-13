@@ -5,19 +5,22 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <% unless flash.empty? %>
-      <script type="text/javascript">
-        <% flash.each do |f| %>
-          <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
-          toastr['<%= type %>']('<%= f[1] %>');
+    <main id="main" class="container flex-fill">
+        <% unless flash.empty? %>
+          <script type="text/javascript">
+            <% flash.each do |f| %>
+              <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+              toastr['<%= type %>']('<%= f[1] %>');
+            <% end %>
+          </script>
         <% end %>
-      </script>
-    <% end %>
-     
-    <%= yield %>
+         
+        <%= yield %>
+    </main>
   </body>
 </html>

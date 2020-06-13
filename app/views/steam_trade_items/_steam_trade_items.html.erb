@@ -2,8 +2,27 @@
 
 <%= content_tag(:div, class: ["steam-trade-items", who].compact) do %>
   <% if grouped[440] %>
+    <% scrap_metal = grouped[440]["Scrap Metal"] %>
+    <% reclaimed_metal = grouped[440]["Reclaimed Metal"] %>
+    <% scrap_count = 0 %>
+    
+    <% if grouped[440]["Refined Metal"] %>
+      <% scrap_count += scrap_metal.count if scrap_metal %>
+      <% scrap_count += reclaimed_metal.count * 3 if reclaimed_metal %>
+      <% grouped[440].delete("Scrap Metal") %>
+      <% grouped[440].delete("Reclaimed Metal") %>
+    <% end %>
+    
     <% grouped[440].each do |k, group| %>
-      <% count = "x#{group.count}" if group.count > 1 %>
+      <% count = group.count %>
+      
+      <% if k == "Refined Metal" %>
+        <% count = (count + (scrap_count / 9.to_f)).round(2) %>
+      <% end %>
+      
+      <% count = count == count.to_i ? count.to_i : count %>
+      <% count = count > 1 ? "x#{count}" : nil %>
+      <% first = group.first %>
       <%= render partial: 'steam_trade_items/steam_trade_item', :locals => { steam_trade_item: group.first, count: count } %>
     <% end %>
   <% end %>

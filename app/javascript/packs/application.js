@@ -3,18 +3,7 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import "../stylesheets/application"
-
-require("@rails/ujs").start()
-require("turbolinks").start()
-require("@rails/activestorage").start()
-require("channels")
-require("chartkick")
-require("chart.js")
-
-global.$ = require("jquery")
-global.toastr = require("toastr")
-
+import "bootstrap"
 import "bootstrap/js/dist/alert"
 import "bootstrap/js/dist/button"
 import "bootstrap/js/dist/carousel"
@@ -28,9 +17,24 @@ import "bootstrap/js/dist/tab"
 import "bootstrap/js/dist/toast"
 import "bootstrap/js/dist/tooltip"
 import "bootstrap/js/dist/util"
+import "../stylesheets/application"
+
+require("@rails/ujs").start()
+require("turbolinks").start()
+require("@rails/activestorage").start()
+require("channels")
+require("chartkick")
+require("chart.js")
+
+require("easy-autocomplete")
+
+global.$ = require("jquery")
+global.toastr = require("toastr")
+
 
 require("packs/bootstrap")
 require("packs/pagination")
+require("packs/items_autocomplete")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)

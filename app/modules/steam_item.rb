@@ -12,6 +12,10 @@ module SteamItem
       return "https://scrap.tf/img/items/warpaint/#{CGI::escape(item.item_name)}_#{skin.value}_#{wear_id}_0.png" if skin
     end
     
+    if self.australium && item.australium_image
+      return "https://steamcommunity-a.akamaihd.net/economy/image/#{item.australium_image}/94fx94x"
+    end
+    
     item.image_url
   end
   

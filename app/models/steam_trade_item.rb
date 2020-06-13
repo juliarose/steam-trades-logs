@@ -20,6 +20,34 @@ class SteamTradeItem < ApplicationRecord
     }).first
   end
   
+  # generates a random unusual that actually exists
+  def self.random_unusual
+    unusuals_path = Rails.root.join("app", "json", "unusuals.json")
+    file = File.open(unusuals_path, "r")
+    json = JSON.parse(file.read).deep_symbolize_keys
+    items = json[:items]
+    item = items.sample.transform_keys do |key|
+      key = key.to_sym
+      # map keys
+      maps = {
+        :priceindex => :particle_id
+      }
+      
+      maps[key] || key
+    end
+    
+    item.delete(:exist)
+    item[:appid] = 440
+    item[:quality_id] = 5
+    item[:craftable] = true
+    item[:strange] = rand() > 0.9
+    
+    steam_trade_item = SteamTradeItem.new(item)
+    steam_trade_item.full_name = steam_trade_item.log_name
+    
+    steam_trade_item
+  end
+  
   # not all data is formatted in the same manner,
   # some may be missing values or use a differenf format
   # but this should parse across all formats

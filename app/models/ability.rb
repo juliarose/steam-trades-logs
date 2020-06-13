@@ -32,7 +32,9 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
     user ||= User.new # guest user (not logged in)
     
-    can :read, :all
+    can [:read], SteamTrade do |steam_trade|
+      can_view_trade?(user, steam_trade)
+    end
     
     if user.superadmin_role?
       can :manage, :all
@@ -44,5 +46,25 @@ class Ability
       can :manage, User
     end
     
+  end
+  
+  def can_view_trade?(user, steam_trade)
+    unless steam_trade.is_unusual_sale?
+      raise CanCan::AccessDenied.new("You do not have permission to view this trade.", [:read, :index, :show], SteamTrade)
+    end
+    
+    return true
+  end
+  
+  def can_view_purchases?(user, steam_trade)
+    unless ballot.is_readable?
+      raise CanCan::AccessDenied.new("Ballot cannot be accessed", [:read, :index, :show], SteamTrade)
+    end
+    
+    unless user.organization_ids.include?(ballot.organization_id)
+      raise CanCan::AccessDenied.new("Insufficient Authorization", [:read, :index, :show], Ballot)
+    end
+    
+    return true
   end
 end

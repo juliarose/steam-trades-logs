@@ -15,9 +15,9 @@ class SteamTrade < ApplicationRecord
     :primary_key => :steamid,
     :foreign_key => :uid
   
-  def is_unusual_sale
+  def is_unusual_sale?
     self.steam_trade_items.any? do |steam_trade_item|
-      !steam_trade_item.is_their_item && steam_trade_item.quality_id == 5
+      !steam_trade_item.is_their_item && !steam_trade_item.particle_id.nil?
     end
   end
   
