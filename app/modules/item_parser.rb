@@ -30,6 +30,10 @@ module ItemParser
     quality_id = attributes[1].to_i
     # fetch the item to get more details for this item (its item name)
     item = Item.find_by_defindex(defindex)
+    
+    # raise exception if item is not found
+    raise "Item with defindex #{defindex} is not in database" if item.nil?
+    
     item_name = item.item_name
     # placeholder
     skin_name = nil

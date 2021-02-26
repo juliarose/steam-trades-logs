@@ -4,7 +4,10 @@
 	<%= link_to destroy_user_session_path, method: :delete do %>Log out<% end %>
 <% end %>
 
-<% if can? :manage, User %>
-	<p>You can manage users. </p>
-	<%= current_user %>
+<% if current_user %>
+	<% if current_user.superadmin_role? %>
+		<p>You are an admin.</p>
+	<% elsif current_user.supervisor_role? %>
+		<p>You are a moderator.</p>
+	<% end %>
 <% end %>

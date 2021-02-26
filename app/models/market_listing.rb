@@ -30,17 +30,17 @@ class MarketListing < ApplicationRecord
     :foreign_key => :value,
     :primary_key => :wear_id
   
-  def image_url
-    self.full_icon_url(128)
+  # we don't care if these are craftable or not
+  def craftable
+    true
   end
   
   def full_icon_url(size = 62)
     "https://steamcommunity-a.akamaihd.net/economy/image/#{self.icon_url}/#{size}fx#{size}f"
   end
   
-  # we don't care if these are craftable or not
-  def craftable
-    true
+  def image_url
+    self.full_icon_url(128)
   end
   
   # gets unusual sales or purchases

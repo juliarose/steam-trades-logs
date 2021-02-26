@@ -10,7 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_081117) do
+ActiveRecord::Schema.define(version: 2021_02_21_201912) do
+
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "cash_trades", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.date "date"
+    t.string "steamid"
+    t.string "tradeid"
+    t.bigint "steam_trade_id", null: false
+    t.string "txid"
+    t.string "email"
+    t.integer "keys"
+    t.integer "usd"
+    t.text "notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "processor_id"
+    t.index ["steam_trade_id"], name: "index_cash_trades_on_steam_trade_id"
+  end
 
   create_table "key_values", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.float "value"
@@ -91,6 +128,12 @@ ActiveRecord::Schema.define(version: 2020_06_05_081117) do
     t.index ["transaction_id"], name: "marketplace_sales_transaction_id"
   end
 
+  create_table "processors", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "scm_values", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.integer "value"
     t.date "date"
@@ -119,6 +162,8 @@ ActiveRecord::Schema.define(version: 2020_06_05_081117) do
     t.bigint "instanceid"
     t.boolean "australium", default: false, null: false
     t.boolean "strange", default: false, null: false
+    t.index ["defindex"], name: "steam_trade_items_defindex"
+    t.index ["item_name"], name: "steam_trade_items_item_name"
     t.index ["quality_id", "is_their_item"], name: "steam_trade_items_quality_id_is_their_item"
     t.index ["quality_id"], name: "steam_trade_items_quality_id"
     t.index ["steam_trade_id"], name: "index_steam_trade_items_on_steam_trade_id"
@@ -158,6 +203,8 @@ ActiveRecord::Schema.define(version: 2020_06_05_081117) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cash_trades", "steam_trades"
   add_foreign_key "marketplace_sale_items", "marketplace_sales"
   add_foreign_key "steam_trade_items", "steam_trades"
 end

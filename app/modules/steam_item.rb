@@ -20,6 +20,6 @@ module SteamItem
   end
   
   def particle_url
-    "https://backpack.tf/images/440/particles/#{self.particle_id}_94x94.png" if self.particle_id
+    "https://scrap.tf/img/particles_440/#{self.particle_id}_380x380.png" if self.particle_id
   end
 end

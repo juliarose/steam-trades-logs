@@ -31,7 +31,6 @@ require("easy-autocomplete")
 global.$ = require("jquery")
 global.toastr = require("toastr")
 
-
 require("packs/bootstrap")
 require("packs/pagination")
 require("packs/items_autocomplete")

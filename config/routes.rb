@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :processors
+  resources :cash_trades
   mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   root to: "home#index"
   
@@ -12,11 +14,8 @@ Rails.application.routes.draw do
   get "/items/search", to: "items#search"
   get "/skins/search", to: "skins#search"
   
-  resources :stats, only: [:index] do
-    collection do
-      get :totals
-    end
-  end
+  
+  get "/stats/owner/:owner", to: "stats#owner"
   
   resources :search, only: [:index] do
     collection do

@@ -43,26 +43,13 @@ class Ability
     end
     
     if user.supervisor_role?
-      can :manage, User
+      can :read, :all
     end
-    
   end
   
   def can_view_trade?(user, steam_trade)
     unless steam_trade.is_unusual_sale?
       raise CanCan::AccessDenied.new("You do not have permission to view this trade.", [:read, :index, :show], SteamTrade)
-    end
-    
-    return true
-  end
-  
-  def can_view_purchases?(user, steam_trade)
-    unless ballot.is_readable?
-      raise CanCan::AccessDenied.new("Ballot cannot be accessed", [:read, :index, :show], SteamTrade)
-    end
-    
-    unless user.organization_ids.include?(ballot.organization_id)
-      raise CanCan::AccessDenied.new("Insufficient Authorization", [:read, :index, :show], Ballot)
     end
     
     return true

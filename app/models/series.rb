@@ -1,7 +1,7 @@
 class Series < ActiveRecord::Base
   establish_connection STEAM_DB
   
-  has_many :effects,
+  has_many :particles,
     :foreign_key => :series_id,
     :primary_key => :value
   

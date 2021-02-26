@@ -13,7 +13,8 @@ class SteamTradesController < ApplicationController
     
     query_params = {
         :full_name => params[:name],
-        :steamid => steamid
+        :steamid => steamid,
+        :steamid_other => params[:steamid_other]
     }.compact
     
     @bot_id = params[:bot_id]

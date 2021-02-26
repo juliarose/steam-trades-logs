@@ -9,7 +9,12 @@ class SteamTrade < ApplicationRecord
   validates_uniqueness_of :tradeofferid, scope: :steamid
   
   # exclude bots from query
-  scope :non_bot, -> { where("steamid_other NOT IN (?)", BOTS) }
+  scope :non_bot, -> { where.not(:steamid_other => (BOTS + BotOwnership.unique_owners).uniq) }
+  
+  # exclude bots for other sites from query
+  scope :non_site_bots, -> { where.not(:steamid_other => SITE_BOTS) }
+  
+  scope :non_cash_trade, -> { where.not(:id => CashTrade.all.map(&:steam_trade_id).compact) }
   
   has_one :bot,
     :primary_key => :steamid,
@@ -34,6 +39,7 @@ class SteamTrade < ApplicationRecord
     
     SteamTrade
       .non_bot
+      .non_cash_trade
       .includes(:steam_trade_items => :item)
       .where(
           "id in (SELECT steam_trade_id FROM steam_trade_items WHERE #{where_query_str})",

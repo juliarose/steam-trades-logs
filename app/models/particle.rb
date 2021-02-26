@@ -15,6 +15,16 @@ class Particle < ActiveRecord::Base
     :primary_key => :value,
     :foreign_key => :priceindex
   
+  def is_taunt?
+    series = Series.find_by_value(self.series_id)
+    
+    unless series
+      return false
+    end
+    
+    series.is_taunt
+  end
+  
   def self.all_cache
     @all_cache ||= Rails.cache.fetch("particle/all", :expires_in => 24.hours) { all.to_a } 
   end
