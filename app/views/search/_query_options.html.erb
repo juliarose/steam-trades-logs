@@ -1,0 +1,17 @@
+
+<div class="row">
+  <div class="col">
+    <%= form_with(controller: params[:controller], action: params[:action], method: "get", data: { :remote => false }) do %>
+      <%= item_name_autocomplete(query[:item_name], query[:defindex]) %>
+      <%= skin_name_autocomplete(query[:skin_name]) %>
+      <%= qualities_select(query[:quality_id]) %>
+      <%= particles_select(query[:particle_id]) %>
+      
+      <%= select_tag(:craftable, options_for_select([["Any craftable", nil], ["Craftable", 1], ["Not craftable", 0]], to_choice(query[:craftable])), { class: "form-control" }) %>
+      <%= select_tag(:strange, options_for_select([["Any strange", nil], ["Strange", 1], ["Not strange", 0]], to_choice(query[:strange])), { class: "form-control" }) %>
+      <%= select_tag(:australium, options_for_select([["Any australium", nil], ["Australium", 1], ["Not australium", 0]], to_choice(query[:australium])), { class: "form-control" }) %>
+      
+      <%= submit_tag("Search", { class: "btn btn-primary" }) %>
+    <% end %>
+  </div>
+</div>

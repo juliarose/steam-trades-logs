@@ -1,0 +1,410 @@
+// Place all the styles related to the TradeItems controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.nocraft {
+	border-color: #300 !important;
+	border-style: dotted !important
+}
+
+.strange {
+    
+}
+
+a.item-link:hover {
+	background: none;
+}
+
+.item.strange {
+	border-color: #cf6a32 !important;
+}
+
+.item.strange:hover {
+	border-color: #8a4620 !important;
+}
+
+.item {
+    background-color: #ccc;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 2px solid #efefef;
+    border-radius: 2px;
+    -webkit-box-shadow: 1px 1px 1px #888;
+    box-shadow: 1px 1px 1px #888;
+    display: inline-block;
+    height: 74px;
+    margin: 2px;
+    position: relative;
+    vertical-align: top;
+    width: 88px;
+}
+
+.item .count {
+    border-top-left-radius: 2px;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,.4);
+    color: #ccc;
+    cursor: default;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 10px;
+    font-variant: proportional-nums;
+    line-height: 12px;
+    padding: 1px 3px;
+    position: absolute;
+}
+
+.item.q-440-0 {
+	background-color: #878787;
+	border-color: #b2b2b2
+}
+
+.item.q-440-0:hover {
+	background-color: #b2b2b2;
+	border-color: #878787
+}
+
+.q-440-border-0 {
+	border-color: #b2b2b2!important
+}
+
+.q-440-border-0:hover {
+	border-color: #878787!important
+}
+
+.q-440-text-0 {
+	color: #8c8c8c!important
+}
+
+.item.q-440-1 {
+	background-color: #2a402f;
+	border-color: #4d7455
+}
+
+.item.q-440-1:hover {
+	background-color: #4d7455;
+	border-color: #2a402f
+}
+
+.q-440-border-1 {
+	border-color: #4d7455!important
+}
+
+.q-440-border-1:hover {
+	border-color: #2a402f!important
+}
+
+.q-440-text-1 {
+	color: #2e4633!important
+}
+
+.item.q-440-2 {
+	background-color: #544e2d;
+	border-color: #8d834b
+}
+
+.item.q-440-2:hover {
+	background-color: #8d834b;
+	border-color: #544e2d
+}
+
+.q-440-border-2 {
+	border-color: #8d834b!important
+}
+
+.q-440-border-2:hover {
+	border-color: #544e2d!important
+}
+
+.q-440-text-2 {
+	color: #5b5530!important
+}
+
+.item.q-440-3 {
+	background-color: #2b3b57;
+	border-color: #476291
+}
+
+.item.q-440-3:hover {
+	background-color: #476291;
+	border-color: #2b3b57
+}
+
+.q-440-border-3 {
+	border-color: #476291!important
+}
+
+.q-440-border-3:hover {
+	border-color: #2b3b57!important
+}
+
+.q-440-text-3 {
+	color: #2e3f5e!important
+}
+
+.item.q-440-4 {
+	background-color: #241b05;
+	border-color: #70550f
+}
+
+.item.q-440-4:hover {
+	background-color: #70550f;
+	border-color: #241b05
+}
+
+.q-440-border-4 {
+	border-color: #70550f!important
+}
+
+.q-440-border-4:hover {
+	border-color: #241b05!important
+}
+
+.q-440-text-4 {
+	color: #2d2206!important
+}
+
+.item.q-440-5 {
+	background-color: #583471;
+	border-color: #8650ac
+}
+
+.item.q-440-5:hover {
+	background-color: #8650ac;
+	border-color: #583471
+}
+
+.q-440-border-5 {
+	border-color: #8650ac!important
+}
+
+.q-440-border-5:hover {
+	border-color: #583471!important
+}
+
+.q-440-text-5 {
+	color: #5d3878!important
+}
+
+.item.q-440-6 {
+	background-color: #a88e00;
+	border-color: gold
+}
+
+.item.q-440-6:hover {
+	background-color: gold;
+	border-color: #a88e00
+}
+
+.q-440-border-6 {
+	border-color: gold!important
+}
+
+.q-440-border-6:hover {
+	border-color: #a88e00!important
+}
+
+.q-440-text-6 {
+	color: #b39700!important
+}
+
+.item.q-440-7 {
+	background-color: #497330;
+	border-color: #70b04a
+}
+
+.item.q-440-7:hover {
+	background-color: #70b04a;
+	border-color: #497330
+}
+
+.q-440-border-7 {
+	border-color: #70b04a!important
+}
+
+.q-440-border-7:hover {
+	border-color: #497330!important
+}
+
+.q-440-text-7 {
+	color: #4e7a33!important
+}
+
+.item.q-440-8 {
+	background-color: #56083f;
+	border-color: #a50f79
+}
+
+.item.q-440-8:hover {
+	background-color: #a50f79;
+	border-color: #56083f
+}
+
+.q-440-border-8 {
+	border-color: #a50f79!important
+}
+
+.q-440-border-8:hover {
+	border-color: #56083f!important
+}
+
+.q-440-text-8 {
+	color: #5f0946!important
+}
+
+.item.q-440-9 {
+	background-color: #497330;
+	border-color: #70b04a
+}
+
+.item.q-440-9:hover {
+	background-color: #70b04a;
+	border-color: #497330
+}
+
+.q-440-border-9 {
+	border-color: #70b04a!important
+}
+
+.q-440-border-9:hover {
+	border-color: #497330!important
+}
+
+.q-440-text-9 {
+	color: #4e7a33!important
+}
+
+.item.q-440-10 {
+	background-color: #878787;
+	border-color: #b2b2b2
+}
+
+.item.q-440-10:hover {
+	background-color: #b2b2b2;
+	border-color: #878787
+}
+
+.q-440-border-10 {
+	border-color: #b2b2b2!important
+}
+
+.q-440-border-10:hover {
+	border-color: #878787!important
+}
+
+.q-440-text-10 {
+	color: #8c8c8c!important
+}
+
+.item.q-440-11 {
+	background-color: #8a4620;
+	border-color: #cf6a32
+}
+
+.item.q-440-11:hover {
+	background-color: #cf6a32;
+	border-color: #8a4620
+}
+
+.q-440-border-11 {
+	border-color: #cf6a32!important
+}
+
+.q-440-border-11:hover {
+	border-color: #8a4620!important
+}
+
+.q-440-text-11 {
+	color: #924a22!important
+}
+
+.item.q-440-12 {
+	background-color: #878787;
+	border-color: #b2b2b2
+}
+
+.item.q-440-12:hover {
+	background-color: #b2b2b2;
+	border-color: #878787
+}
+
+.q-440-border-12 {
+	border-color: #b2b2b2!important
+}
+
+.q-440-border-12:hover {
+	border-color: #878787!important
+}
+
+.q-440-text-12 {
+	color: #8c8c8c!important
+}
+
+.item.q-440-13 {
+	background-color: #0cc880;
+	border-color: #38f3ab
+}
+
+.item.q-440-13:hover {
+	background-color: #38f3ab;
+	border-color: #0cc880
+}
+
+.q-440-border-13 {
+	border-color: #38f3ab!important
+}
+
+.q-440-border-13:hover {
+	border-color: #0cc880!important
+}
+
+.q-440-text-13 {
+	color: #0dd286!important
+}
+
+.item.q-440-14 {
+	background-color: #5f0000;
+	border-color: #b60000
+}
+
+.item.q-440-14:hover {
+	background-color: #b60000;
+	border-color: #5f0000
+}
+
+.q-440-border-14 {
+	border-color: #b60000!important
+}
+
+.q-440-border-14:hover {
+	border-color: #5f0000!important
+}
+
+.q-440-text-14 {
+	color: #6a0000!important
+}
+
+.item.q-440-15 {
+	background-color: #cfcfcf;
+	border-color: #fafafa
+}
+
+.item.q-440-15:hover {
+	background-color: #fafafa;
+	border-color: #cfcfcf
+}
+
+.q-440-border-15 {
+	border-color: #fafafa!important
+}
+
+.q-440-border-15:hover {
+	border-color: #cfcfcf!important
+}
+
+.q-440-text-15 {
+	color: #d4d4d4!important
+}

@@ -1,0 +1,7 @@
+<div class="pagination-container" id="market-listings-purchases">
+  <div class="market-listings">
+    <%= render @market_listings_purchases %>
+  </div>
+  
+  <%= paginate @market_listings_purchases, :params => params.merge({ :controller => :search, :action => :market_listings_purchases }) %>
+</div>

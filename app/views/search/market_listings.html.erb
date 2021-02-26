@@ -1,0 +1,17 @@
+<%= render 'search/query_options', { query: @query_params } %>
+
+<div id="sales">
+  <h1>Sales</h1>
+  <% if @market_listings_sales.any? %>
+    <h2>Market Listings</h2>
+    <%= render 'search/market_listings_sales' %>
+  <% end %>
+</div>
+
+<div id="purchases">
+  <h1>Purchases</h1>
+  <% if @market_listings_purchases.any? %>
+    <h2>Market Listings</h2>
+    <%= render 'search/market_listings_purchases' %>
+  <% end %>
+</div>

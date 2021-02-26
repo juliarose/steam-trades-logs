@@ -1,0 +1,17 @@
+<%= render 'search/query_options', { query: @query_params } %>
+
+<div id="sales">
+  <h1>Sales</h1>
+  <% if @steam_trades_sales.any? %>
+    <h2>Steam Trades</h2>
+    <%= render 'search/steam_trades_sales' %>
+  <% end %>
+</div>
+
+<div id="purchases">
+  <h1>Purchases</h1>
+  <% if @steam_trades_purchases.any? %>
+    <h2>Steam Trades</h2>
+    <%= render 'search/steam_trades_purchases' %>
+  <% end %>
+</div>

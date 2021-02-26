@@ -1,0 +1,72 @@
+<%= form_with(model: cash_trade, local: true) do |form| %>
+  <% if cash_trade.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cash_trade.errors.count, "error") %> prohibited this cash_trade from being saved:</h2>
+
+      <ul>
+        <% cash_trade.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_select :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :steamid %>
+    <%= form.text_field :steamid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tradeid %>
+    <%= form.text_field :tradeid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :steam_trade_id %>
+    <%= form.text_field :steam_trade_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :txid %>
+    <%= form.text_field :txid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :keys %>
+    <%= form.text_field :keys %>
+  </div>
+
+  <div class="field">
+    <%= form.label :usd %>
+    <%= form.number_field :usd %>
+  </div>
+
+  <div class="field">
+    <%= form.label :processor_id %>
+    <%= form.select :processor_id, options_from_collection_for_select(Processor.all, :id, :name) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :screenshots %>
+    <%= form.file_field :screenshots, multiple: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

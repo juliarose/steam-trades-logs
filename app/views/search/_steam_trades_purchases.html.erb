@@ -1,0 +1,7 @@
+<div class="pagination-container" id="steam-trades-purchases">
+  <div class="steam-trades">
+    <%= render @steam_trades_purchases %>
+  </div>
+  
+  <%= paginate @steam_trades_purchases, :params => params.merge({ :controller => :search, :action => :steam_trades_purchases }) %>
+</div>

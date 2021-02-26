@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @cash_trade.date %>
+</p>
+
+<p>
+  <strong>Steamid:</strong>
+  <%= link_to @cash_trade.steamid, steam_trades_path(:steamid_other => @cash_trade.steamid) %>
+</p>
+
+<p>
+  <strong>Tradeid:</strong>
+  <%= @cash_trade.tradeid %>
+</p>
+
+<p>
+  <strong>Steam trade:</strong>
+  <%= render @cash_trade.steam_trade if @cash_trade.steam_trade %>
+</p>
+
+<p>
+  <strong>Txid:</strong>
+  <%= @cash_trade.txid %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @cash_trade.email %>
+</p>
+
+<p>
+  <strong>Keys:</strong>
+  <%= @cash_trade.keys %>
+</p>
+
+<p>
+  <strong>Usd:</strong>
+  <%= humanized_money_with_symbol @cash_trade.usd_money %>
+</p>
+
+<p>
+  <strong>Processor:</strong>
+  <%= @cash_trade.processor.name %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @cash_trade.notes %>
+</p>
+
+<p>
+  <strong>Screenshots:</strong>
+  <br/>
+  <% @cash_trade.screenshots.each do |screenshot| %>
+    <%= image_tag(screenshot) %>
+  <% end%>
+</p>
+
+<%= link_to 'Edit', edit_cash_trade_path(@cash_trade) %> |
+<%= link_to 'Back', cash_trades_path %>
