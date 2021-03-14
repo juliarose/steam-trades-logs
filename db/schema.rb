@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_201912) do
+ActiveRecord::Schema.define(version: 2021_03_01_010654) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_02_21_201912) do
     t.date "date"
     t.string "steamid"
     t.string "tradeid"
-    t.bigint "steam_trade_id", null: false
+    t.bigint "steam_trade_id"
     t.string "txid"
     t.string "email"
     t.integer "keys"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2021_02_21_201912) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "processor_id"
+    t.string "mobile_number"
     t.index ["steam_trade_id"], name: "index_cash_trades_on_steam_trade_id"
   end
 

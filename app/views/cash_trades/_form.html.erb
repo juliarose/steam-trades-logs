@@ -42,6 +42,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :mobile_number %>
+    <%= form.text_field :mobile_number %>
+  </div>
+
+  <div class="field">
     <%= form.label :keys %>
     <%= form.text_field :keys %>
   </div>
@@ -53,7 +58,7 @@
 
   <div class="field">
     <%= form.label :processor_id %>
-    <%= form.select :processor_id, options_from_collection_for_select(Processor.all, :id, :name) %>
+    <%= form.select :processor_id, options_from_collection_for_select(Processor.all, :id, :name, cash_trade.processor_id) %>
   </div>
 
   <div class="field">

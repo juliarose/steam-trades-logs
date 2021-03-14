@@ -15,20 +15,31 @@
   <%= @cash_trade.tradeid %>
 </p>
 
-<p>
-  <strong>Steam trade:</strong>
-  <%= render @cash_trade.steam_trade if @cash_trade.steam_trade %>
-</p>
+<% if @cash_trade.steam_trade %>
+  <p>
+    <strong>Steam trade:</strong>
+    <%= render @cash_trade.steam_trade %>
+  </p>
+<% end %>
 
 <p>
   <strong>Txid:</strong>
   <%= @cash_trade.txid %>
 </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @cash_trade.email %>
-</p>
+<% if @cash_trade.email %>
+  <p>
+    <strong>Email:</strong>
+    <%= @cash_trade.email %>
+  </p>
+<% end %>
+
+<% if @cash_trade.mobile_number %>
+  <p>
+    <strong>Mobile number:</strong>
+    <%= @cash_trade.mobile_number %>
+  </p>
+<% end %>
 
 <p>
   <strong>Keys:</strong>
@@ -45,18 +56,22 @@
   <%= @cash_trade.processor.name %>
 </p>
 
-<p>
-  <strong>Notes:</strong>
-  <%= @cash_trade.notes %>
-</p>
+<% if @cash_trade.notes %>
+  <p>
+    <strong>Notes:</strong>
+    <%= @cash_trade.notes %>
+  </p>
+<% end %>
 
-<p>
-  <strong>Screenshots:</strong>
-  <br/>
-  <% @cash_trade.screenshots.each do |screenshot| %>
-    <%= image_tag(screenshot) %>
-  <% end%>
-</p>
+<% if @cash_trade.screenshots.any? %>
+  <p>
+    <strong>Screenshots:</strong>
+    <br/>
+    <% @cash_trade.screenshots.each do |screenshot| %>
+      <%= image_tag(screenshot) %>
+    <% end%>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_cash_trade_path(@cash_trade) %> |
 <%= link_to 'Back', cash_trades_path %>

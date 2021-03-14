@@ -71,6 +71,6 @@ class CashTradesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cash_trade_params
-      params.require(:cash_trade).permit(:date, :steamid, :tradeid, :steam_trade_id, :txid, :email, :keys, :usd, :processor_id, :notes, screenshots: [])
+      params.require(:cash_trade).permit(:date, :steamid, :tradeid, :steam_trade_id, :txid, :email, :mobile_number, :keys, :usd, :processor_id, :notes, screenshots: [])
     end
 end

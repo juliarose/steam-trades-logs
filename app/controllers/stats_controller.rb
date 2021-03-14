@@ -16,11 +16,6 @@ class StatsController < ApplicationController
     rejected_steamid_others = (SITE_BOTS + my_bots + owners).uniq
     since = 1.month.ago
     
-    rejected_steamids_keys = rejected_steamids.clone
-    
-    # apples
-    # rejected_steamids_keys << "76561198176599590"
-    
     @steam_trades = SteamTrade
       .where("traded_at >= ?", since)
       .where("steamid NOT IN (?)", rejected_steamids)
@@ -29,32 +24,73 @@ class StatsController < ApplicationController
     @steam_trade_items = SteamTradeItem
       .joins(:steam_trade)
       .where("steam_trades.traded_at >= ?", since)
-      .where("steam_trades.steamid NOT IN (?)", rejected_steamids_keys)
+      .where("steam_trades.steamid NOT IN (?)", rejected_steamids)
       .where("steam_trades.steamid_other NOT IN (?)", rejected_steamid_others)
-      .where({
-        :full_name => [
-            "Mann Co. Supply Crate Key",
-            "Refined MetaL"
-        ]
-      })
-    @steam_trade_keys = SteamTradeItem
-      .joins(:steam_trade)
-      .where("steam_trades.traded_at >= ?", since)
-      .where("steam_trades.steamid NOT IN (?)", rejected_steamids_keys)
-      .where("steam_trades.steamid_other NOT IN (?)", rejected_steamid_others)
-      .where({
-        :full_name => "Mann Co. Supply Crate Key"
-      })
-    @marketplace_sales = MarketplaceSale.where("date >= ?", since).where("earned_credit >= ?", 0)
+    @marketplace_sales = MarketplaceSale.where("date >= ?", since)
     @cash_trades = CashTrade.where("date >= ?", since)
     
     @market_listings_sales = @market_listings.where({ :is_credit => true })
     @market_listings_purchases = @market_listings.where({ :is_credit => false })
     
-    @keys_spent = @steam_trade_keys.where({ :is_their_item => false })
-    @keys_received = @steam_trade_keys.where({ :is_their_item => true })
-    
     @steam_trades_chart = @steam_trades.group_by_day(:traded_at).count
+    
+    # these are all SQL-safe
+    currency_names = [
+      "Mann Co. Supply Crate Key",
+      "Refined Metal",
+      "Reclaimed Metal",
+      "Scrap Metal"
+    ]
+    item_names_sql_str = currency_names.map { |a| SteamTradeItem.connection.quote(a) }.join(", ")
+    since_date_sql_str = since.utc.to_s(:db)
+    rejected_steamids_sql_str = rejected_steamids.map { |a| SteamTradeItem.connection.quote(a) }.join(", ")
+    rejected_steamid_others_sql_str = rejected_steamid_others.map { |a| SteamTradeItem.connection.quote(a) }.join(", ")
+    
+    # since this is such a complex query and it's difficult to build in rails
+    sql = %{
+      SELECT
+        COUNT(*) AS count,
+        `steam_trade_items`.`is_their_item` AS is_their_item,
+        `steam_trade_items`.`item_name` AS item_name,
+        CONVERT_TZ(DATE_FORMAT(CONVERT_TZ(`steam_trades`.`traded_at`, '+00:00', 'Etc/UTC'), '%Y-%m-%d 00:00:00'), 'Etc/UTC', '+00:00') AS traded_at
+      FROM `steam_trade_items`
+      INNER JOIN `steam_trades` ON `steam_trades`.`id` = `steam_trade_items`.`steam_trade_id`
+      WHERE
+        `steam_trade_items`.`item_name` IN (#{item_names_sql_str}) AND
+        `steam_trades`.`traded_at` >= '#{since_date_sql_str}' AND
+        `steam_trades`.`steamid` NOT IN (#{rejected_steamids_sql_str}) AND
+        `steam_trades`.`steamid_other` NOT IN (#{rejected_steamid_others_sql_str})
+      GROUP BY 
+        `steam_trade_items`.`is_their_item`,
+        `steam_trade_items`.`item_name`,
+        CONVERT_TZ(DATE_FORMAT(CONVERT_TZ(`steam_trades`.`traded_at`, '+00:00', 'Etc/UTC'), '%Y-%m-%d 00:00:00'), 'Etc/UTC', '+00:00')
+    }.gsub(/\s+/, " ").strip
+    steam_trade_items_groups_query = ActiveRecord::Base.connection.execute(sql)
+    
+    date_range = Hash[(since.to_date..Time.now.to_date).map { |date| [date, 0] }]
+    
+    @steam_trade_items_groups = {
+      0 => {},
+      1 => {}
+    }
+    
+    currency_names.each do |currency_name|
+      [
+        0,
+        1
+      ].each do |is_their_item|
+        @steam_trade_items_groups[is_their_item][currency_name] = date_range.clone
+      end
+    end
+    
+    steam_trade_items_groups_query.to_a.each do |row|
+      count, is_their_item, item_name, traded_at = row
+      
+      traded_at = traded_at.to_date
+      
+      @steam_trade_items_groups[is_their_item][item_name][traded_at] = count
+    end
+    
     @market_listings_chart = [
       {
         name: "Sales",
@@ -65,28 +101,54 @@ class StatsController < ApplicationController
         data: @market_listings_purchases.group_by_day(:date_acted).sum("price")
       }
     ]
+    
+    logger.info @market_listings_chart[0][:data]
+    logger.info @steam_trade_items_groups[1]["Mann Co. Supply Crate Key"]
+    
     @steam_trade_keys_chart = [
       {
         name: "Received",
-        data: @keys_received.group_by_day("steam_trades.traded_at").count
+        data: @steam_trade_items_groups[1]["Mann Co. Supply Crate Key"]
       },
       {
         name: "Spent",
-        data: @keys_spent.group_by_day("steam_trades.traded_at").count
+        data: @steam_trade_items_groups[0]["Mann Co. Supply Crate Key"]
       }
     ]
     @marketplace_sales_chart = @marketplace_sales.group_by_day(:date).sum("earned_credit")
     
+    
+    metal_spent = 0
+    metal_received = 0
+    
+    [
+      "Refined Metal",
+      "Reclaimed Metal",
+      "Scrap Metal"
+    ].each do |metal_type|
+      values = {
+        "Refined Metal" => 1,
+        "Reclaimed Metal" => 3,
+        "Scrap Metal" => 9
+      }
+      value = values[metal_type]
+      spent = @steam_trade_items_groups[0][metal_type].values.inject(&:+)
+      received = @steam_trade_items_groups[1][metal_type].values.inject(&:+)
+      
+      metal_spent += (spent / value).to_i
+      metal_received += (received / value).to_i
+    end
+    
     @stats = {
       :keys => {
         :name => "Keys",
-        :spent => 0,
-        :received => 0
+        :spent => @steam_trade_items_groups[0]["Mann Co. Supply Crate Key"].values.inject(&:+),
+        :received =>@steam_trade_items_groups[1]["Mann Co. Supply Crate Key"].values.inject(&:+)
       },
       :metal => {
         :name => "Metal",
-        :spent => 0,
-        :received => 0
+        :spent => metal_spent,
+        :received => metal_received
       },
       :scm => {
         :name => "SCM",
@@ -106,25 +168,9 @@ class StatsController < ApplicationController
       @stats[:usd][:spent] = @cash_trades.map(&:usd_money).inject(&:+)
     end
     
-    @steam_trade_items.each do |steam_trade_item|
-      key = steam_trade_item.is_their_item ? :received : :spent
-      
-      case steam_trade_item.full_name
-      when "Mann Co. Supply Crate Key"
-        @stats[:keys][key] += 1
-      when "Refined Metal"
-        # metal values are whole integers
-        @stats[:metal][key] += 9
-      when "Reclaimed Metal"
-        @stats[:metal][key] += 3
-      when "Scrap Metal"
-        @stats[:metal][key] += 1
-      end
-    end
-    
     # now we convert to 2 decimal refined metal values
-    @stats[:metal][:spent] = (@stats[:metal][:spent].to_f / 9).round(2)
-    @stats[:metal][:received] = (@stats[:metal][:received].to_f / 9).round(2)
+    # @stats[:metal][:spent] = (@stats[:metal][:spent].to_f / 9).round(2)
+    # @stats[:metal][:received] = (@stats[:metal][:received].to_f / 9).round(2)
     
     @market_listings.each do |market_listing|
       key = market_listing.is_credit ? :received : :spent
