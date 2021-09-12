@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :processors
-  resources :cash_trades
+  resources :cash_trades do
+    collection do
+      get "/new/:id", to: "cash_trades#new"
+    end
+  end
   mount RailsAdmin::Engine => "/admin", as: "rails_admin"
   root to: "home#index"
   

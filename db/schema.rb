@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_010654) do
+ActiveRecord::Schema.define(version: 2021_04_12_115322) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
@@ -178,8 +178,10 @@ ActiveRecord::Schema.define(version: 2021_03_01_010654) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "tradeofferid", null: false
     t.string "steamid", limit: 17, null: false
+    t.string "tradeid"
     t.index ["steamid"], name: "steam_trades_steamid"
     t.index ["steamid_other"], name: "steam_trades_steamid_other"
+    t.index ["traded_at"], name: "traded_at_index"
   end
 
   create_table "usd_values", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
