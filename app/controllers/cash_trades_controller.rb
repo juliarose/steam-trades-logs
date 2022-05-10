@@ -6,8 +6,7 @@ class CashTradesController < ApplicationController
   # GET /cash_trades
   # GET /cash_trades.json
   def index
-    
-    @cash_trades = CashTrade.all
+    @cash_trades = CashTrade.preload(:processor, :steam_trade).all
   end
 
   # GET /cash_trades/1
@@ -20,7 +19,7 @@ class CashTradesController < ApplicationController
     @existing_cash_trade = CashTrade.find(params[:id]) if params[:id]
     
     if @existing_cash_trade
-      attributes = @existing_cash_trade.attributes.slice('date', 'email', 'mobile_number', 'steamid', 'usd', 'keys', 'processor_id', 'notes')
+      attributes = @existing_cash_trade.attributes.slice('email', 'mobile_number', 'steamid', 'processor_id')
       
       @cash_trade = CashTrade.new(attributes)
     else

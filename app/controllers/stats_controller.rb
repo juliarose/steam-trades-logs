@@ -7,12 +7,12 @@ class StatsController < ApplicationController
     my_ownerships = BotOwnership.where("steamid = ?", owner)
     owners = BotOwnership.all.map(&:steamid)
     bot_ids = my_ownerships.map(&:bot_id)
-    my_bots = Bot.where(:id => bot_ids).map(&:uid)
+    my_bots = Bot.where(:id => bot_ids).map(&:steamid)
     
     rejected_bot_ids = BotOwnership.where("bot_id NOT IN (?)", bot_ids).map(&:bot_id).uniq
     other_bots = Bot.where(:id => rejected_bot_ids)
     
-    rejected_steamids = other_bots.map(&:uid)
+    rejected_steamids = other_bots.map(&:steamid)
     rejected_steamid_others = (SITE_BOTS + my_bots + owners).uniq
     since = 1.month.ago
     

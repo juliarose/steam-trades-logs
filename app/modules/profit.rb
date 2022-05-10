@@ -14,7 +14,7 @@ module Profit
   
   def self.check(begin_date, end_date, owner = "76561198080179568")
     bot_ids = BotOwnership.where(:steamid => owner).map(&:bot_id)
-    bot_steamid_ids = Bot.where(:id => bot_ids).map(&:uid)
+    bot_steamid_ids = Bot.where(:id => bot_ids).map(&:steamid)
     rejected_steamids = (BOTS + BotOwnership.unique_owners).uniq
     cash_trade_steam_trade_ids = CashTrade.all.map(&:steam_trade_id).uniq.compact
     
@@ -112,7 +112,7 @@ module Profit
     
     puts purchases.length
     
-    File.open("/home/colors/js/profit/items.json", "w") do |f|
+    File.open("/home/colors/dev/js/profit/items.json", "w") do |f|
       f.write({ :sales => profits }.to_json)
     end
   end
