@@ -2,9 +2,8 @@
 
 <h1>Market Listings</h1>
 
-<%= will_paginate @market_listings %>
 <%= render @market_listings %>
-<%= will_paginate @market_listings %>
+<%== pagy_nav(@pagy) %>
 
 <br>
 

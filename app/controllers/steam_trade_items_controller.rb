@@ -6,7 +6,7 @@ class SteamTradeItemsController < ApplicationController
   # GET /steam_trade_items
   # GET /steam_trade_items.json
   def index
-    @steam_trade_items = SteamTradeItem.all.paginate(page: params[:page], per_page: 20)
+    @pagy, @steam_trade_items = pagy(SteamTradeItem.all)
   end
 
   # GET /steam_trade_items/1

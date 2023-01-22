@@ -6,7 +6,7 @@ class MarketplaceSaleItemsController < ApplicationController
   # GET /marketplace_sale_items
   # GET /marketplace_sale_items.json
   def index
-    @marketplace_sale_items = MarketplaceSaleItem.all.paginate(page: params[:page], per_page: 20)
+    @pagy, @marketplace_sale_items = pagy(MarketplaceSaleItem.all)
   end
 
   # GET /marketplace_sale_items/1

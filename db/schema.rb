@@ -2,38 +2,44 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2021_04_12_115322) do
-
-  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_01_22_094108) do
+  create_table "active_storage_attachments", charset: "latin1", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "latin1", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
     t.text "metadata"
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "cash_trades", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "latin1", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "cash_trades", charset: "latin1", force: :cascade do |t|
     t.date "date"
     t.string "steamid"
     t.string "tradeid"
@@ -43,21 +49,21 @@ ActiveRecord::Schema[6.1].define(version: 2021_04_12_115322) do
     t.integer "keys"
     t.integer "usd"
     t.text "notes"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "processor_id"
     t.string "mobile_number"
     t.index ["steam_trade_id"], name: "index_cash_trades_on_steam_trade_id"
   end
 
-  create_table "key_values", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "key_values", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.float "value"
     t.date "date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "market_listings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "market_listings", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "transaction_id", null: false
     t.string "transaction_id_high"
     t.integer "index"
@@ -77,8 +83,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_04_12_115322) do
     t.date "date_listed", null: false
     t.integer "price", null: false
     t.string "seller"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "defindex"
     t.integer "particle_id"
     t.string "full_name"
@@ -91,11 +97,12 @@ ActiveRecord::Schema[6.1].define(version: 2021_04_12_115322) do
     t.boolean "australium"
     t.boolean "strange", default: false, null: false
     t.boolean "craftable", default: false, null: false
+    t.string "steamid", limit: 17
     t.index ["quality_id", "is_credit"], name: "market_listings_quality_id_is_credit"
     t.index ["transaction_id"], name: "market_listings_transaction_id"
   end
 
-  create_table "marketplace_sale_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "marketplace_sale_items", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "marketplace_sale_id", null: false
     t.integer "price", null: false
     t.bigint "assetid"
@@ -109,8 +116,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_04_12_115322) do
     t.string "item_name"
     t.integer "wear_id"
     t.string "sku"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "full_sku"
     t.integer "skin_id"
     t.boolean "australium", default: false, null: false
@@ -120,29 +127,29 @@ ActiveRecord::Schema[6.1].define(version: 2021_04_12_115322) do
     t.index ["quality_id"], name: "quality_id"
   end
 
-  create_table "marketplace_sales", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "marketplace_sales", charset: "utf8mb4", collation: "utf8mb4_unicode_ci", force: :cascade do |t|
     t.integer "earned_credit", null: false
     t.string "transaction_id", null: false
-    t.datetime "date", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "date", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["transaction_id"], name: "marketplace_sales_transaction_id"
   end
 
-  create_table "processors", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "processors", charset: "latin1", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "scm_values", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "scm_values", charset: "latin1", force: :cascade do |t|
     t.integer "value"
     t.date "date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "steam_trade_items", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "steam_trade_items", charset: "latin1", force: :cascade do |t|
     t.bigint "assetid"
     t.integer "appid", limit: 2
     t.integer "contextid", limit: 2
@@ -155,8 +162,6 @@ ActiveRecord::Schema[6.1].define(version: 2021_04_12_115322) do
     t.integer "quality_id", limit: 1
     t.string "item_name"
     t.string "full_name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.bigint "steam_trade_id", null: false
     t.boolean "is_their_item"
     t.bigint "classid"
@@ -170,12 +175,12 @@ ActiveRecord::Schema[6.1].define(version: 2021_04_12_115322) do
     t.index ["steam_trade_id"], name: "index_steam_trade_items_on_steam_trade_id"
   end
 
-  create_table "steam_trades", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "steam_trades", charset: "latin1", force: :cascade do |t|
     t.string "steamid_other", limit: 17, null: false
-    t.datetime "traded_at", null: false
+    t.datetime "traded_at", precision: nil, null: false
     t.integer "trade_offer_state"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "tradeofferid", null: false
     t.string "steamid", limit: 17, null: false
     t.string "tradeid"
@@ -184,21 +189,21 @@ ActiveRecord::Schema[6.1].define(version: 2021_04_12_115322) do
     t.index ["traded_at"], name: "traded_at_index"
   end
 
-  create_table "usd_values", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "usd_values", charset: "latin1", force: :cascade do |t|
     t.integer "value"
     t.date "date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "users", charset: "latin1", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "superadmin_role", default: false
     t.boolean "supervisor_role", default: false
     t.boolean "user_role", default: true
@@ -207,6 +212,7 @@ ActiveRecord::Schema[6.1].define(version: 2021_04_12_115322) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cash_trades", "steam_trades"
   add_foreign_key "marketplace_sale_items", "marketplace_sales"
   add_foreign_key "steam_trade_items", "steam_trades"

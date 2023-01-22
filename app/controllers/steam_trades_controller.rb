@@ -18,11 +18,11 @@ class SteamTradesController < ApplicationController
     }.compact
     
     @bot_id = params[:bot_id]
-    @steam_trades = SteamTrade
+    @pagy, @steam_trades = pagy(SteamTrade
       .includes(:steam_trade_items => :item)
       .where(query_params)
       .order('traded_at DESC')
-      .paginate(page: params[:page], per_page: 20)
+    )
   end
 
   # GET /steam_trades/1

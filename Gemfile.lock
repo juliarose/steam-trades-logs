@@ -191,6 +191,7 @@ GEM
     nokogiri (1.14.0-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (6.0.1)
     public_suffix (5.0.1)
     puma (3.12.6)
     racc (1.6.2)
@@ -290,7 +291,7 @@ GEM
     websocket-extensions (0.1.5)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    will_paginate (3.1.8)
+    will_paginate (3.3.1)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.6)
@@ -316,6 +317,7 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   money-rails (~> 1.12)
   mysql2 (~> 0.5.2)
+  pagy (~> 6.0, >= 6.0.1)
   puma (~> 3.11)
   rails (~> 7.0.4)
   rails-jquery-autocomplete
@@ -333,7 +335,7 @@ DEPENDENCIES
   webdrivers
   webpacker (~> 5.0)
   whenever
-  will_paginate (~> 3.1.0)
+  will_paginate (~> 3.3)
 
 RUBY VERSION
    ruby 3.0.2p107

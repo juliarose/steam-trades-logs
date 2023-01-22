@@ -6,7 +6,7 @@ class MarketListingsController < ApplicationController
   # GET /market_listings
   # GET /market_listings.json
   def index
-    @market_listings = MarketListing.all.paginate(page: params[:page], per_page: 20)
+    @pagy, @market_listings = pagy(MarketListing.all)
   end
 
   # GET /market_listings/1

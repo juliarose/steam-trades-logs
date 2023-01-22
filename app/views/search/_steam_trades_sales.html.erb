@@ -3,5 +3,5 @@
     <%= render @steam_trades_sales %>
   </div>
   
-  <%= paginate @steam_trades_sales, :params => params.merge({ :controller => :search, :action => :steam_trades_sales }) %>
+  <%== pagy_nav(@pagy_steam_trades_sales) %>
 </div>

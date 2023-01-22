@@ -3,5 +3,5 @@
     <%= render @market_listings_sales %>
   </div>
   
-  <%= paginate @market_listings_sales, :params => params.merge({ :controller => :search, :action => :market_listings_sales }) %>
+  <%== pagy_nav(@pagy_market_listings_sales) %>
 </div>

@@ -2,9 +2,8 @@
 
 <h1>Marketplace Sale Items</h1>
 
-<%= will_paginate @marketplace_sale_items %>
 <%= render @marketplace_sale_items %>
-<%= will_paginate @marketplace_sale_items %>
+<%== pagy_nav(@pagy) %>
 
 <br>
 

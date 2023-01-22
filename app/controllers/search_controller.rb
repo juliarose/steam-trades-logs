@@ -9,21 +9,21 @@ class SearchController < ApplicationController
     @steam_trades = helpers.steam_trades(@query_params, steam_trades_query_params)
     @market_listings = helpers.market_listings(@query_params)
     
-    @marketplace_sale_items = helpers
+    @pagy_marketplace_sale_items, @marketplace_sale_items = pagy(helpers
       .marketplace_sale_items(@query_params)
-      .paginate(page: params[:page], per_page: 20)
-    @steam_trades_sales = @steam_trades
+    )
+    @pagy_steam_trades_sales, @steam_trades_sales = pagy(@steam_trades
       .where(:steam_trade_items => @query_params.clone.merge({ :is_their_item => false }))
-      .paginate(page: params[:page], per_page: 20)
-    @steam_trades_purchases = @steam_trades
+    )
+    @pagy_steam_trades_purchases, @steam_trades_purchases = pagy(@steam_trades
       .where(:steam_trade_items => @query_params.clone.merge({ :is_their_item => true }))
-      .paginate(page: params[:page], per_page: 20)
-    @market_listings_sales = @market_listings
+    )
+    @pagy_market_listings_sales, @market_listings_sales = pagy(@market_listings
       .where(:is_credit => true)
-      .paginate(page: params[:page], per_page: 20)
-    @market_listings_purchases = @market_listings
+    )
+    @pagy_market_listings_purchases, @market_listings_purchases = pagy(@market_listings
       .where(:is_credit => false)
-      .paginate(page: params[:page], per_page: 20)
+    )
     
     # will preload all items associated with the associated trades
     helpers.preload_steam_trade_items(@steam_trades_sales)
