@@ -2,22 +2,24 @@
   "name": "trades",
   "private": true,
   "dependencies": {
-    "@rails/actioncable": "^6.0.0-alpha",
-    "@rails/activestorage": "^6.0.0-alpha",
+    "@rails/actioncable": "^7.0.4-1",
+    "@rails/activestorage": "^7.0.4-1",
     "@rails/ujs": "^6.0.3-1",
-    "@rails/webpacker": "^4.0.7",
+    "@rails/webpacker": "^5.4.3",
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.3",
     "chartkick": "^3.2.0",
     "easy-autocomplete": "^1.3.5",
     "jquery": "^3.5.1",
     "js-autocomplete": "^1.0.4",
+    "pg": "^8.7.3",
     "popper.js": "^1.16.1",
     "toastr": "^2.1.4",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@types/pg": "^8.6.5",
     "webpack": "^4.43.0",
     "webpack-dev-server": "^3.7.2"
   }
