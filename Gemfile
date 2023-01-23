@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'money-rails', '~>1.12'
-
 ruby '3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -11,9 +9,8 @@ gem 'sprockets-rails'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 
+gem 'puma'
 gem 'mysql2', '~> 0.5.2'
-# Use Puma as the app server
-gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5'
 gem 'sassc'
@@ -56,20 +53,21 @@ group :test do
   gem 'webdrivers'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'pagy', '~> 6.0', '>= 6.0.1'
-gem 'devise'
-gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
-gem 'cancancan'
-gem 'figaro'
-gem 'materialize-sass'
-gem 'whenever', require: false
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# Pagination
+gem 'pagy', '~> 6.0', '>= 6.0.1'
+gem 'devise'
+gem 'rails_admin', '~> 3.0'
+gem 'cancancan'
+gem 'figaro'
+gem 'whenever', require: false
 gem 'activerecord-import'
 gem 'chartkick'
 gem 'groupdate'
-gem 'rails-jquery-autocomplete'
 gem 'mini_magick', '~> 4.8'
+gem 'money-rails', '~>1.12'
+
+gem "tailwindcss-rails", "~> 2.0"

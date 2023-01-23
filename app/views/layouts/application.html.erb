@@ -6,21 +6,22 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <main id="main" class="container flex-fill">
-        <% unless flash.empty? %>
-          <script type="text/javascript">
-            <% flash.each do |f| %>
-              <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
-              toastr['<%= type %>']('<%= f[1] %>');
-            <% end %>
-          </script>
-        <% end %>
-         
-        <%= yield %>
+    <main id="main" class="container mx-auto">
+      <% unless flash.empty? %>
+        <script type="text/javascript">
+          <% flash.each do |f| %>
+            <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+            toastr['<%= type %>']('<%= f[1] %>');
+          <% end %>
+        </script>
+      <% end %>
+        
+      <%= yield %>
     </main>
   </body>
 </html>

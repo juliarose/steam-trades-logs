@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'public/index'
   resources :processors
   resources :cash_trades do
     collection do
