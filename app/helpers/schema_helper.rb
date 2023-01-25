@@ -18,7 +18,11 @@ module SchemaHelper
       name: "quality"
     }
     
-    collection_select(:quality, :value, Quality.all, :value, :name, options, html_options)
+    qualities = Quality
+      .where("name NOT LIKE 'rarity%'")
+      .where("name NOT IN ('Valve', 'Customized', 'Completed')")
+    
+    collection_select(:quality, :value, qualities, :value, :name, options, html_options)
   end
   
   def particles_select(selected = nil)

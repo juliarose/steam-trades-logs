@@ -8,7 +8,7 @@
  */
 
  .easy-autocomplete {
-    position: relative;
+    display: inline;
   }
   
   .easy-autocomplete input:hover, .easy-autocomplete input:focus {
