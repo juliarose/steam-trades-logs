@@ -1,12 +1,13 @@
 <% data = { :toggle => "tooltip", :title => steam_trade_item.full_name } %>
 <% item_class = get_steam_trade_item_class(steam_trade_item) %>
+<% item_class.push("rounded-lg") %>
 <% style = get_steam_trade_style(steam_trade_item) %>
 <% query = get_steam_trade_query(steam_trade_item) %>
 
-<%= link_to search_index_path(query), class: "item-link", target: "_blank" do %>
+<%= link_to search_index_path(query), class: ["item-link"], target: "_blank" do %>
   <%= content_tag(:div, data: data, class: item_class, style: style) do %>
-    <% if defined?(count) %>
-      <span class="count"><%= " #{count}" %></span>
+    <% unless count.nil? %>
+      <span class="count text-xs font-semibold"><%= " #{count}" %></span>
     <% end %>
   <% end %>
 <% end %>

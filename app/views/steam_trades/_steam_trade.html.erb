@@ -1,10 +1,10 @@
 <% received_items, given_items = steam_trade.steam_trade_items.partition(&:is_their_item) %>
 
-<%= content_tag(:div, id: "steam-trade-#{steam_trade.id}", class: ["steam-trade"]) do %>
-  <div class="header">
+<%= content_tag(:div, id: "steam-trade-#{steam_trade.id}", class: ["steam-trade", "p-4", "mb-4", "bg-slate-500"]) do %>
+  <h4 class="text-sm mb-2">
     <%= link_to "Trade ##{steam_trade.id}", steam_trade %>
-  </div>
+  </h4>
   <%= render partial: 'steam_trade_items/steam_trade_items', :locals => { steam_trade_items: given_items, who: "my" } %>
-  <div class="rule"></div>
+  <div class="rule my-2"></div>
   <%= render partial: 'steam_trade_items/steam_trade_items', :locals => { steam_trade_items: received_items, who: "them" } %>
 <% end %>

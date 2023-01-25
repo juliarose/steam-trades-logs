@@ -28,31 +28,28 @@ a.item-link:hover {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border: 2px solid #efefef;
-    border-radius: 2px;
-    -webkit-box-shadow: 1px 1px 1px #888;
-    box-shadow: 1px 1px 1px #888;
+    border: 3px solid #efefef;
     display: inline-block;
-    height: 74px;
     margin: 2px;
     position: relative;
     vertical-align: top;
-    width: 88px;
+    width: 6rem;
+    height: 5rem;
+	box-shadow: 1px 0 0.1rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .item .count {
-    border-top-left-radius: 2px;
-    bottom: 0;
-    right: 0;
-    background: rgba(0,0,0,.4);
+    border-radius: 0.2rem;
+    bottom: 4px;
+    right: 4px;
+    background: rgba(0,0,0,.5);
     color: #ccc;
     cursor: default;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    font-size: 10px;
     font-variant: proportional-nums;
-    line-height: 12px;
+    line-height: 1rem;
     padding: 1px 3px;
     position: absolute;
 }
