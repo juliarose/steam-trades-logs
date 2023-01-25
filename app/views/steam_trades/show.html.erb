@@ -2,13 +2,13 @@
 
 <p>
   <strong>Steamid:</strong>
-  <%= @steam_trade.steamid %>
+  <%= reptf_link @steam_trade.steamid %>
 </p>
 
 <% if can? :manage, @steam_trade %>
   <p>
     <strong>Steamid other:</strong>
-    <%= @steam_trade.steamid_other %>
+    <%= reptf_link @steam_trade.steamid_other %>
   </p>
 <% end %>
 
