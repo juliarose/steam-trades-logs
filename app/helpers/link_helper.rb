@@ -5,5 +5,5 @@ module LinkHelper
             "https://rep.tf/#{steamid}",
             target: '_blank'
     end
-  end
+end
   

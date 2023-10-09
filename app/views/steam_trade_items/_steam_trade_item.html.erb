@@ -1,10 +1,11 @@
-<% data = { :toggle => "tooltip", :title => steam_trade_item.full_name } %>
+<% data = { "bs-toggle" => "tooltip" } %>
 <% item_class = get_steam_trade_item_class(steam_trade_item) %>
 <% item_class.push("rounded-lg") %>
+<% item_class.push("transition duration-150 ease-in-out") %>
 <% style = get_steam_trade_style(steam_trade_item) %>
 <% query = get_steam_trade_query(steam_trade_item) %>
 
-<%= link_to search_index_path(query), class: ["item-link"], target: "_blank" do %>
+<%= link_to search_index_path(query), class: ["item-link"], title:  steam_trade_item.full_name, target: "_blank" do %>
   <%= content_tag(:div, data: data, class: item_class, style: style) do %>
     <% unless count.nil? %>
       <span class="count text-xs font-semibold"><%= " #{count}" %></span>

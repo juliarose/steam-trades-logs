@@ -9,6 +9,7 @@ gem 'sprockets-rails'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 
+gem 'pg'
 gem 'puma'
 gem 'mysql2', '~> 0.5.2'
 # Use SCSS for stylesheets
@@ -71,3 +72,5 @@ gem 'mini_magick', '~> 4.8'
 gem 'money-rails', '~>1.12'
 
 gem "tailwindcss-rails", "~> 2.0"
+
+gem "importmap-rails", "~> 1.1"
