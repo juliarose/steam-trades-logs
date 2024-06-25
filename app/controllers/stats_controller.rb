@@ -13,7 +13,8 @@ class StatsController < ApplicationController
     other_bots = Bot.where(:id => rejected_bot_ids)
     
     rejected_steamids = other_bots.map(&:steamid)
-    rejected_steamid_others = (SITE_BOTS + my_bots + owners).uniq
+    marketplace_bots = MarketplaceBot.all.map(&:steamid)
+    rejected_steamid_others = (DONATION_BOTS + marketplace_bots + my_bots + owners).uniq
     since = 1.month.ago
     
     @steam_trades = SteamTrade

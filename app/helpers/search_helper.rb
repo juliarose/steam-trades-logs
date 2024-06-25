@@ -69,8 +69,9 @@ module SearchHelper
   end
   
   def steam_trades(query_params, steam_trades_query_params = Hash.new)
-    # we want to exclude certain steamid"s from the results
-    rejected_steamids = (BOTS + BotOwnership.unique_owners).uniq
+    # we want to exclude certain steamids from the results
+    bots = DONATION_BOTS + MarketplaceBot.all.map(&:steamid) + Bot.all.map(&:steamid)
+    rejected_steamids = (bots + BotOwnership.unique_owners).uniq
     
     steam_trades = SteamTrade
       .joins(:steam_trade_items)
