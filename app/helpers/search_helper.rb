@@ -106,7 +106,7 @@ module SearchHelper
     # preloader = 
     ActiveRecord::Associations::Preloader.new(
       records: steam_trades.to_a,
-      associations: :steam_trade_items
+      associations: [steam_trade_items: :item]
     ).call
   end
 end
