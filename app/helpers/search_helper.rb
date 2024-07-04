@@ -102,10 +102,11 @@ module SearchHelper
   
   def preload_steam_trade_items(steam_trades)
     # will preload all items associated with the associated trades
-    preloader = ActiveRecord::Associations::Preloader.new(
+    # I'm not sure if this does anything
+    # preloader = 
+    ActiveRecord::Associations::Preloader.new(
       records: steam_trades.to_a,
       associations: :steam_trade_items
-    )
-    # preloader.preload(steam_trades.to_a, :steam_trade_items)
+    ).call
   end
 end

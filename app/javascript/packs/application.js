@@ -20,7 +20,6 @@ global.$ = require("jquery")
 global.toastr = require("toastr")
 
 require("packs/tooltips")
-require("packs/pagination")
 require("packs/items_autocomplete")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
