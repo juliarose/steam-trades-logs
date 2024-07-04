@@ -5,6 +5,10 @@ class Quality < ActiveRecord::Base
     @all_cache ||= Rails.cache.fetch("quality/all", :expires_in => 24.hours) { all.to_a } 
   end
   
+  def self.flush_all_cache
+    @all_cache = nil
+  end
+  
   def self.find_by_name(value)
     all_cache.detect { |c| c.name == value }
   end

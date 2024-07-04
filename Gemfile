@@ -4,14 +4,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.0.4'
+gem 'rails', '~> 7.1.3.4'
 gem 'sprockets-rails'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 
 gem 'pg'
 gem 'puma'
-gem 'mysql2', '~> 0.5.2'
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5'
 gem 'sassc'
@@ -71,6 +70,5 @@ gem 'groupdate'
 gem 'mini_magick', '~> 4.8'
 gem 'money-rails', '~>1.12'
 
-gem "tailwindcss-rails", "~> 2.0"
-
-gem "importmap-rails", "~> 1.1"
+gem 'tailwindcss-rails', '~> 2.0'
+gem 'importmap-rails', '~> 1.1'

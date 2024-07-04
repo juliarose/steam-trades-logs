@@ -15,18 +15,16 @@ class Particle < ActiveRecord::Base
     :primary_key => :value,
     :foreign_key => :priceindex
   
-  def is_taunt?
-    series = Series.find_by_value(self.series_id)
-    
-    unless series
-      return false
-    end
-    
-    series.is_taunt
-  end
-  
   def self.all_cache
     @all_cache ||= Rails.cache.fetch("particle/all", :expires_in => 24.hours) { all.to_a } 
+  end
+  
+  def self.flush_all_cache
+    @all_cache = nil
+  end
+  
+  def self.unknown(options = {})
+    Particle.new(options.merge(:value => 0, :name => "Unknown"))
   end
   
   def self.find_by_value(value)
@@ -37,12 +35,14 @@ class Particle < ActiveRecord::Base
     all_cache.detect { |c| c.name == value }
   end
   
-  def self.flush_all_cache
-    @all_cache = nil
-  end
-  
-  def self.unknown(options = {})
-    Particle.new(options.merge(:value => 0, :name => "Unknown"))
+  def is_taunt?
+    series = Series.find_by_value(self.series_id)
+    
+    unless series
+      return false
+    end
+    
+    series.is_taunt
   end
   
   def visible

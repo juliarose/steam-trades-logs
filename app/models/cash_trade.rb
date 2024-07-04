@@ -23,9 +23,6 @@ class CashTrade < ApplicationRecord
   
   scope :by_year, lambda { |year| where('extract(year from date) = ?', year) }
   
-  #validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }, unless: :mobile_number?
-  #validates :mobile_number, :length => { minimum: 10, maximum: 10 }, presence: true, unless: :email?
-  #
   private
   
   # sets fields to null

@@ -5,12 +5,12 @@ class Currency < ActiveRecord::Base
     @all_cache ||= Rails.cache.fetch("currency/all", :expires_in => 30.minutes) { all.to_a }
   end
 
-  def self.find_by_name(name)
-    all_cache.detect { |c| c.name.downcase == name.downcase }
-  end
-
   def self.flush_all_cache
     @all_cache = nil
+  end
+  
+  def self.find_by_name(name)
+    all_cache.detect { |c| c.name.downcase == name.downcase }
   end
   
   def self.detect_symbol(str)
