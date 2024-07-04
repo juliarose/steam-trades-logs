@@ -211,7 +211,7 @@ module Profit
   
   def self.purchase_value(steam_trade)
     steam_trade_items = steam_trade.steam_trade_items
-    my_items, them_items = steam_trade_items.partition(&:is_their_item)
+    my_items = steam_trade_items.filter { |steam_trade_item| !steam_trade_item.is_their_item }
     unusuals = my_items.filter { |steam_trade_item| steam_trade_item.quality_id == 5 }
     
     # by wepaons
