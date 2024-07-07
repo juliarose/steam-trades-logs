@@ -22,7 +22,6 @@ class SteamTradesController < ApplicationController
       .includes(:steam_trade_items => :item)
       .where(query_params)
       .order('traded_at DESC')
-      .load_async
     )
   end
 
@@ -59,7 +58,7 @@ class SteamTradesController < ApplicationController
       end
     end
   end
-
+  
   # PATCH/PUT /steam_trades/1
   # PATCH/PUT /steam_trades/1.json
   def update
